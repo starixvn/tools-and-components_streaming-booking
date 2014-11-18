@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace StreamingBooking.Models
+{
+    public class StreamModel
+    {
+        public int StreamId { get; set; }
+
+        public int EventId { get; set; }
+
+        public string SportName { get; set; }
+
+        public string LeagueName { get; set; }
+
+        public string HomeName { get; set; }
+
+        public string AwayName { get; set; }
+
+        public DateTime KickOffDate { get; set; }
+
+        public bool IBCBet { get; set; }
+
+        public bool Bodog { get; set; }
+
+        public bool Dafabet { get; set; }
+
+        public bool Fun88 { get; set; }
+
+        public bool Macaubet { get; set; }
+
+        public bool TLC { get; set; }
+    }
+}

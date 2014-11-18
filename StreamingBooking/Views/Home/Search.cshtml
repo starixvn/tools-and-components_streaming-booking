@@ -1,0 +1,97 @@
+﻿@using StreamingBooking.Services
+@using System.Configuration
+@{
+    ViewBag.Title = "Search";
+    Layout = null;
+
+    var ibcBet = Model.LicenseeStream.Where(x => x.Key == APIService.IBCBet).SelectMany(s => s.Value);
+    var bogDog = Model.LicenseeStream.Where(x => x.Key == APIService.Bodog).SelectMany(s => s.Value);
+    var dafaBet = Model.LicenseeStream.Where(x => x.Key == APIService.Dafabet).SelectMany(s => s.Value);
+    var fun88 = Model.LicenseeStream.Where(x => x.Key == APIService.Fun88).SelectMany(s => s.Value);
+    var macauBet = Model.LicenseeStream.Where(x => x.Key == APIService.Macaubet).SelectMany(s => s.Value);
+    var tcl = Model.LicenseeStream.Where(x => x.Key == APIService.Tlc88).SelectMany(s => s.Value);
+
+    var activeRows = StreamingBooking.Helper.ReadFile(ConfigurationManager.AppSettings["StreamingPath"]);
+    var remarks = StreamingBooking.Helper.ReadRemarkFile(ConfigurationManager.AppSettings["StreamingRemarkPath"]);
+}
+@model StreamingBooking.Models.StreamViewModel
+@if (Model.Streams.Count != 0)
+{
+    int counter = 0;
+    var activeRowClass = string.Empty;
+    var oddRowClass = string.Empty;
+
+    foreach (var item in Model.Streams)
+    {
+        counter++;
+        activeRowClass = activeRows.Contains(item.StreamId.ToString()) ? "active" : string.Empty;
+        oddRowClass = counter % 2 == 0 ? "odd" : string.Empty;
+    <tr class="@(oddRowClass) @(activeRowClass)" data-stream-id="@item.StreamId">
+        <td>
+            @item.StreamId
+        </td>
+        <td>
+            @item.KickOffDate.ToString("MM/dd/yyyy")
+        </td>
+        <td align="center">
+            @item.SportName
+        </td>
+        <td align="center">
+            @item.LeagueName
+        </td>
+        <td>
+            @item.HomeName
+        </td>
+        <td>
+            @item.AwayName
+        </td>
+        <td align="center">
+            @if (ibcBet.Select(x => x.StreamId).ToArray().Contains(item.StreamId))
+            { 
+                <span>Booked</span>
+            }
+        </td>
+        <td align="center">
+            @if (bogDog.Select(x => x.StreamId).ToArray().Contains(item.StreamId))
+            { 
+                <span>Booked</span>
+            }
+        </td>
+        <td align="center">
+            @if (dafaBet.Select(x => x.StreamId).ToArray().Contains(item.StreamId))
+            { 
+                <span>Booked</span>
+            }
+        </td>
+        <td align="center">
+            @if (fun88.Select(x => x.StreamId).ToArray().Contains(item.StreamId))
+            { 
+                <span>Booked</span>
+            }
+        </td>
+        <td align="center">
+            @if (macauBet.Select(x => x.StreamId).ToArray().Contains(item.StreamId))
+            { 
+                <span>Booked</span>
+            }
+        </td>
+        <td align="center">
+            @if (tcl.Select(x => x.StreamId).ToArray().Contains(item.StreamId))
+            { 
+                <span>Booked</span>
+            }
+        </td>
+        <td>
+            @Html.TextBox("remark",remarks.Keys.Contains(item.StreamId) ? remarks[item.StreamId] : string.Empty)
+        </td>
+    </tr>
+    }
+}
+else
+{ 
+    <tr>
+        <td colspan="8">
+            No information
+        </td>
+    </tr>
+}

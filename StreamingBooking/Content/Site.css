@@ -1,0 +1,95 @@
+﻿body
+{
+    font-size: .85em;
+    font-family: "Segoe UI" , Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #fff;
+}
+
+header, footer, nav, section
+{
+    display: block;
+}
+
+table.tbl-data
+{
+    border-collapse: separate;
+    border-spacing: 0;
+    clear: both;
+    margin: 0 auto;
+    width: 100%;
+}
+
+table.tbl-data thead th
+{
+    border-bottom: 1px solid #BDBDBD;
+    border-right: 1px solid #BDBDBD;
+    padding:10px 0px 10px 0px;
+    font-weight: bold;
+    text-align: center;
+}
+
+table.tbl-data tbody td
+{
+    padding: 5px;
+     border-right: 1px solid #BDBDBD;
+}
+
+table.tbl-data tbody tr td.league
+{
+    background-color: #CED8F6;
+    font-weight: bold;
+}
+
+table.tbl-data tbody tr.odd
+{
+    background-color: #ECF6CE;
+}
+
+table.tbl-data tbody tr.active
+{
+    background-color:Yellow;
+    font-weight:bold;
+    }
+
+.container
+{
+    float: left;
+    display: block;
+    min-width: 1024px;
+    width: 100%;
+    border: 1px solid #BDBDBD;
+    margin-top: 10px;
+}
+.filter
+{
+    float: left;
+    display: block;
+    min-width: 1024px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #BDBDBD;
+}
+.filter table
+{
+    margin-left:10px;
+}
+.filter table tr td.lable
+{
+    
+}
+.filter table tr td.text
+{
+   padding-right:20px;
+}
+
+.ajax-loading {
+    position: fixed;
+    padding-top:15%;
+    padding-left:50%;
+    display: none;
+    z-index: 10000;
+    width: 100%;
+    height:100%;
+    opacity:50%;
+}

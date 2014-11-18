@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Index";
+    List<SelectListItem> autoRefresh = new List<SelectListItem>();
+
+    autoRefresh.Add(new SelectListItem
+    {
+        Text = "5",
+        Value = "5"
+    });
+
+    autoRefresh.Add(new SelectListItem
+    {
+        Text = "10",
+        Value = "10"
+    });
+
+    autoRefresh.Add(new SelectListItem
+    {
+        Text = "15",
+        Value = "15"
+    });
+
+   
+}
+@model StreamingBooking.Models.StreamViewModel
+@section scripts{
+    @Scripts.Render("~/bundles/site")
+    <script type="text/ecmascript">
+        $(document).ready(function () {
+            SITE.initialize();
+        });
+    </script>
+}
+<div class="filter">
+    <table>
+        <tr>
+            <td class="lable">
+                Leagues
+            </td>
+            <td class="text">
+                 @Html.DropDownList("leagues", new SelectList(Model.Leagues ))
+            </td>
+            <td class="lable">
+                From
+            </td>
+            <td class="text">
+                @Html.DropDownList("fromDate", new SelectList(Model.From))
+            </td>
+            <td class="lable">
+                To
+            </td>
+            <td class="text">
+                @Html.DropDownList("toDate", new SelectList(Model.To))
+            </td>
+            <td class="lable">
+                Auto Refresh
+            </td>
+            <td class="text">
+                @Html.DropDownList("auto-refresh", autoRefresh)
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="container">
+    <table id="tbl-stream" class="tbl-data">
+        <thead>
+            <tr>
+                <th>
+                    StreamId
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Sport
+                </th>
+                <th>
+                    League
+                </th>
+                <th>
+                    Team A
+                </th>
+                <th>
+                    Team B
+                </th>
+                <th>
+                    IBCBet
+                </th>
+                <th>
+                    Bodog
+                </th>
+                <th>
+                    Dafabet
+                </th>
+                <th>
+                    Fun88
+                </th>
+                <th>
+                    Macaubet
+                </th>
+                <th>
+                    TLC
+                </th>
+                 <th>
+                    Remark
+                </th>
+            </tr>
+        </thead>
+        <tbody id="data-contain">
+        </tbody>
+    </table>
+</div>
