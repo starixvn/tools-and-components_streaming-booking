@@ -47,9 +47,22 @@
 
     };
 
+    siteObject.getFullUrl = function (relativePath) {
+        var fullUrl = "";
+        var baseUrl = window.location.href;
+
+        if (baseUrl.endsWith("/")) {
+            baseUrl = baseUrl.substring(0, baseUrl.length - 1);
+        }
+
+        fullUrl = baseUrl + relativePath;
+
+        return fullUrl;
+    };
+
     siteObject.UpdateRowActive = function (streamId) {
         $.ajax({
-            url: "/Home/UpdateActiveRow",
+            url: siteObject.getFullUrl("/Home/UpdateActiveRow"),
             data: {
                 streamId: streamId
             },
@@ -61,8 +74,9 @@
         var fromDate = $('#fromDate').val();
         var toDate = $('#toDate').val();
         var league = $('#leagues').val();
+
         $.ajax({
-            url: "/Home/Search",
+            url: siteObject.getFullUrl("/Home/Search"),
             data: {
                 fromDate: fromDate,
                 toDate: toDate,
@@ -88,7 +102,7 @@
 
     siteObject.GetLeagues = function (league) {
         $.ajax({
-            url: "/Home/GetLeagues",
+            url: siteObject.getFullUrl("/Home/GetLeagues"),
             type: 'POST',
             success: function (data) {
                 $('#leagues').find('option').remove();
@@ -120,7 +134,7 @@
                 var remark = $this.val();
 
                 $.ajax({
-                    url:"/Home/UpdateRemark",
+                    url: siteObject.getFullUrl("/Home/UpdateRemark"),
                     data: {
                         streamId: streamId,
                         remark: remark
