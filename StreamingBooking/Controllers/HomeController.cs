@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Xml;
-using StreamingBooking.Services;
-using StreamingBooking.Models;
 using System.Configuration;
+using System.Linq;
+using System.Web.Mvc;
 using System.Xml.Linq;
+using StreamingBooking.Models;
+using StreamingBooking.Services;
 
 namespace StreamingBooking.Controllers
 {
     public class HomeController : Controller
     {
-        private static IDictionary<string, IList<StreamModel>> APIData { get; set; }
+        private static List<StreamModel> _streams;
 
         public ActionResult Index()
         {
@@ -41,20 +39,17 @@ namespace StreamingBooking.Controllers
         [HttpPost]
         public ActionResult Search(string fromDate, string toDate, string league)
         {
-            APIData = Data();
+            _streams = GetStreamData();
 
-            var dataUnion = DataUnion();
-
-            dataUnion = dataUnion
-                .Where(x => x.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
-                    && x.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null)
-                    && (!string.IsNullOrWhiteSpace(league) ? x.LeagueName == league : x.LeagueName == x.LeagueName))
-                .ToList();
+            var matchedStreamData = _streams
+                                .Where(x => x.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
+                                    && x.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null)
+                                    && (!string.IsNullOrWhiteSpace(league) ? x.LeagueName == league : x.LeagueName == x.LeagueName))
+                                .ToList();
 
             var model = new StreamViewModel()
             {
-                Streams = dataUnion.ToList(),
-                LicenseeStream = APIData
+                Streams = matchedStreamData
             };
 
             return View(model);
@@ -63,9 +58,7 @@ namespace StreamingBooking.Controllers
         [HttpPost]
         public ActionResult GetLeagues()
         {
-            var dataUnion = DataUnion();
-
-            var leagues = dataUnion.GroupBy(x => x.LeagueName).Select(s => new { name = s.Key, value = s.Key });
+            var leagues = _streams.GroupBy(x => x.LeagueName).Select(s => new { name = s.Key, value = s.Key });
 
             return Json(leagues, JsonRequestBehavior.AllowGet);
         }
@@ -75,7 +68,7 @@ namespace StreamingBooking.Controllers
         {
             var filePath = ConfigurationManager.AppSettings["StreamingPath"];
 
-             Helper.WriteFile(filePath, streamId);
+            Helper.WriteFile(filePath, streamId);
         }
 
         [HttpPost]
@@ -83,47 +76,53 @@ namespace StreamingBooking.Controllers
         {
             var filePath = ConfigurationManager.AppSettings["StreamingRemarkPath"];
 
-          Helper.WriteRemarkFile(filePath, streamId, remark);
+            Helper.WriteRemarkFile(filePath, streamId, remark);
         }
 
-        private IDictionary<string, IList<StreamModel>> Data()
+        private List<StreamModel> GetStreamData()
         {
-            Dictionary<string, IList<StreamModel>> streams = new Dictionary<string, IList<StreamModel>>();
+            var streams = new List<StreamModel>();
+
+            GetStreamEventDataFromUNASApi(streams);
+
+            GetStreamEventDataFromIMGApi(streams);
+
+            streams = streams.Distinct(new StreamingComparer()).ToList();
+
+            return streams;
+        }
+
+        private void GetStreamEventDataFromIMGApi(List<StreamModel> streams)
+        {
+            var licensees = IMGAPIService.Licensees();
+            string imgApiUrl = ConfigurationManager.AppSettings["IMG.API.Path"];
+
+            foreach (var licensee in licensees)
+            {
+                IList<StreamModel> events = IMGAPIService.GetStreamEventData(licensee, imgApiUrl);
+
+                streams.AddRange(events);
+            }
+        }
+
+        private static void GetStreamEventDataFromUNASApi(List<StreamModel> streams)
+        {
             var licensees = APIService.Licensees();
+
             foreach (var licensee in licensees)
             {
                 var apiSetting = string.Format("{0}?{1}&{2}&{3}&{4}",
                 ConfigurationManager.AppSettings["API.Path"],
                 "pid=" + licensee.PartnerId,
-                "auth=" + licensee.Authentication,
+                "auth=" + licensee.APISecret,
                 "filter=streams",
                 "days=" + ConfigurationManager.AppSettings["API.Days"]);
 
                 XDocument doc = Convert.ToBoolean(ConfigurationManager.AppSettings["IsLocal"]) ? APIService.ReadXmlFile(licensee.PathTest) : APIService.GetXmlResponse(apiSetting);
-                var licenseeStreams = APIService.ProcessEntityElements(doc);
-                streams.Add(licensee.PartnerName, licenseeStreams);
+                var licenseeStreams = APIService.ProcessEntityElements(licensee.PartnerName, doc);
+
+                streams.AddRange(licenseeStreams);
             }
-
-            return streams;
-        }
-
-        private IList<StreamModel> DataUnion()
-        {
-            var ibcBet = APIData.Where(x => x.Key == APIService.IBCBet).SelectMany(s => s.Value);
-            var bogDog = APIData.Where(x => x.Key == APIService.Bodog).SelectMany(s => s.Value);
-            var dafaBet = APIData.Where(x => x.Key == APIService.Dafabet).SelectMany(s => s.Value);
-            var fun88 = APIData.Where(x => x.Key == APIService.Fun88).SelectMany(s => s.Value);
-            var macauBet = APIData.Where(x => x.Key == APIService.Macaubet).SelectMany(s => s.Value);
-            var tcl = APIData.Where(x => x.Key == APIService.Tlc88).SelectMany(s => s.Value);
-
-            var unionData = ibcBet.Union(bogDog, new StreamingComparer())
-                                    .Union(dafaBet, new StreamingComparer())
-                                    .Union(fun88, new StreamingComparer())
-                                    .Union(macauBet, new StreamingComparer())
-                                    .Union(tcl, new StreamingComparer());
-
-            return unionData.ToList();
-
         }
     }
 }

@@ -4,13 +4,6 @@
     ViewBag.Title = "Search";
     Layout = null;
 
-    var ibcBet = Model.LicenseeStream.Where(x => x.Key == APIService.IBCBet).SelectMany(s => s.Value);
-    var bogDog = Model.LicenseeStream.Where(x => x.Key == APIService.Bodog).SelectMany(s => s.Value);
-    var dafaBet = Model.LicenseeStream.Where(x => x.Key == APIService.Dafabet).SelectMany(s => s.Value);
-    var fun88 = Model.LicenseeStream.Where(x => x.Key == APIService.Fun88).SelectMany(s => s.Value);
-    var macauBet = Model.LicenseeStream.Where(x => x.Key == APIService.Macaubet).SelectMany(s => s.Value);
-    var tcl = Model.LicenseeStream.Where(x => x.Key == APIService.Tlc88).SelectMany(s => s.Value);
-
     var activeRows = StreamingBooking.Helper.ReadFile(ConfigurationManager.AppSettings["StreamingPath"]);
     var remarks = StreamingBooking.Helper.ReadRemarkFile(ConfigurationManager.AppSettings["StreamingRemarkPath"]);
 }
@@ -46,43 +39,55 @@
             @item.AwayName
         </td>
         <td align="center">
-            @if (ibcBet.Select(x => x.StreamId).ToArray().Contains(item.StreamId))
+            @if (item.IBCBet)
             { 
                 <span>Booked</span>
             }
         </td>
         <td align="center">
-            @if (bogDog.Select(x => x.StreamId).ToArray().Contains(item.StreamId))
+            @if (item.Bodog)
             { 
                 <span>Booked</span>
             }
         </td>
         <td align="center">
-            @if (dafaBet.Select(x => x.StreamId).ToArray().Contains(item.StreamId))
+            @if (item.Dafabet)
             { 
                 <span>Booked</span>
             }
         </td>
         <td align="center">
-            @if (fun88.Select(x => x.StreamId).ToArray().Contains(item.StreamId))
+            @if (item.Fun88)
             { 
                 <span>Booked</span>
             }
         </td>
         <td align="center">
-            @if (macauBet.Select(x => x.StreamId).ToArray().Contains(item.StreamId))
+            @if (item.Macaubet)
             { 
                 <span>Booked</span>
             }
         </td>
         <td align="center">
-            @if (tcl.Select(x => x.StreamId).ToArray().Contains(item.StreamId))
+            @if (item.TLC)
+            { 
+                <span>Booked</span>
+            }
+        </td>
+        <td align="center">
+            @if (item.ALog)
+            { 
+                <span>Booked</span>
+            }
+        </td>
+        <td align="center">
+            @if (item.Mayfair)
             { 
                 <span>Booked</span>
             }
         </td>
         <td>
-            @Html.TextBox("remark",remarks.Keys.Contains(item.StreamId) ? remarks[item.StreamId] : string.Empty)
+            @Html.TextBox("remark", remarks.Keys.Contains(item.StreamId) ? remarks[item.StreamId] : string.Empty)
         </td>
     </tr>
     }

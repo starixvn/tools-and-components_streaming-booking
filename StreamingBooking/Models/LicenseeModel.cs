@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace StreamingBooking.Models
+﻿namespace StreamingBooking.Models
 {
     public class LicenseeModel
     {
@@ -11,8 +6,8 @@ namespace StreamingBooking.Models
 
         public string PartnerName { get; set; }
 
-        public string Authentication { get; set; }
-
+        public string APISecret { get; set; }
+       
         public string PathTest { get; set; }
     }
 }

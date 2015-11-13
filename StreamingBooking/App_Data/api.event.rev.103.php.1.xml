@@ -16,7 +16,7 @@
 		<sport>Soccer</sport>
 		<liga>International Friendlies</liga>
 		<competition>Friendly Matches</competition>
-		<saison>2014</saison>
+		<saison>2015</saison>
 		<pool/>
 		<round/>
 		<court/>
@@ -26,7 +26,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Tuesday</day>
-		<date>2014-11-18</date>
+		<date>2015-11-12</date>
 		<start>
 			<time>12:35</time>
 			<offset>na</offset>
@@ -61,7 +61,7 @@
 		<sport>Soccer</sport>
 		<liga>International Friendlies</liga>
 		<competition>Friendly Matches</competition>
-		<saison>2014</saison>
+		<saison>2015</saison>
 		<pool/>
 		<round/>
 		<court/>
@@ -71,7 +71,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Tuesday</day>
-		<date>2014-11-18</date>
+		<date>2015-11-12</date>
 		<start>
 			<time>17:00</time>
 			<offset>na</offset>
@@ -106,7 +106,7 @@
 		<sport>Basketball</sport>
 		<liga>Baltic Basketball League</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round/>
 		<court/>
@@ -116,7 +116,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Tuesday</day>
-		<date>2014-11-18</date>
+		<date>2015-11-12</date>
 		<start>
 			<time>17:30</time>
 			<offset>na</offset>
@@ -151,7 +151,7 @@
 		<sport>Soccer</sport>
 		<liga>International Friendlies</liga>
 		<competition>Friendly Matches</competition>
-		<saison>2014</saison>
+		<saison>2015</saison>
 		<pool/>
 		<round/>
 		<court/>
@@ -161,7 +161,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Tuesday</day>
-		<date>2014-11-18</date>
+		<date>2015-11-12</date>
 		<start>
 			<time>21:00</time>
 			<offset>na</offset>
@@ -196,7 +196,7 @@
 		<sport>Basketball</sport>
 		<liga>Baltic Basketball League</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round/>
 		<court/>
@@ -206,7 +206,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Wednesday</day>
-		<date>2014-11-19</date>
+		<date>2015-11-19</date>
 		<start>
 			<time>17:30</time>
 			<offset>na</offset>

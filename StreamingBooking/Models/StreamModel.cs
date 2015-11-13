@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace StreamingBooking.Models
 {
@@ -32,5 +29,9 @@ namespace StreamingBooking.Models
         public bool Macaubet { get; set; }
 
         public bool TLC { get; set; }
+
+        public bool ALog { get; set; }
+
+        public bool Mayfair { get; set; }
     }
 }

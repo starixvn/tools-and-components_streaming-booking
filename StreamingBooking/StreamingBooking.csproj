@@ -118,11 +118,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
+    <Compile Include="Models\IMG\EventModel.cs" />
+    <Compile Include="Models\IMG\MatchModel.cs" />
+    <Compile Include="Models\IMG\PropertyModel.cs" />
+    <Compile Include="Models\IMG\SportModel.cs" />
+    <Compile Include="Models\IMG\TournamentModel.cs" />
     <Compile Include="Models\LicenseeModel.cs" />
     <Compile Include="Models\StreamModel.cs" />
     <Compile Include="Models\StreamViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\APIService.cs" />
+    <Compile Include="Services\IMGAPIService.cs" />
     <Compile Include="StreamingComparer.cs" />
   </ItemGroup>
   <ItemGroup>

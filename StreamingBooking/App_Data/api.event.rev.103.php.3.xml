@@ -16,7 +16,7 @@
 		<sport>Basketball</sport>
 		<liga>JPN Japanese bj League</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round/>
 		<court/>
@@ -26,7 +26,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Tuesday</day>
-		<date>2014-11-18</date>
+		<date>2015-11-12</date>
 		<start>
 			<time>11:30</time>
 			<offset>na</offset>
@@ -61,7 +61,7 @@
 		<sport>Basketball</sport>
 		<liga>Baltic Basketball League</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round/>
 		<court/>
@@ -71,7 +71,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Tuesday</day>
-		<date>2014-11-18</date>
+		<date>2015-11-12</date>
 		<start>
 			<time>17:30</time>
 			<offset>na</offset>
@@ -106,7 +106,7 @@
 		<sport>Basketball</sport>
 		<liga>Baltic Basketball League</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round/>
 		<court/>
@@ -116,7 +116,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Wednesday</day>
-		<date>2014-11-19</date>
+		<date>2015-11-19</date>
 		<start>
 			<time>17:30</time>
 			<offset>na</offset>
@@ -151,7 +151,7 @@
 		<sport>Basketball</sport>
 		<liga>Euroleague</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>06</round>
 		<court/>
@@ -161,7 +161,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Thursday</day>
-		<date>2014-11-20</date>
+		<date>2015-11-20</date>
 		<start>
 			<time>16:30</time>
 			<offset>na</offset>
@@ -196,7 +196,7 @@
 		<sport>Basketball</sport>
 		<liga>Euroleague</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>06</round>
 		<court/>
@@ -206,7 +206,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Thursday</day>
-		<date>2014-11-20</date>
+		<date>2015-11-20</date>
 		<start>
 			<time>18:00</time>
 			<offset>na</offset>
@@ -241,7 +241,7 @@
 		<sport>Basketball</sport>
 		<liga>Euroleague</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>06</round>
 		<court/>
@@ -251,7 +251,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Thursday</day>
-		<date>2014-11-20</date>
+		<date>2015-11-20</date>
 		<start>
 			<time>18:45</time>
 			<offset>na</offset>
@@ -286,7 +286,7 @@
 		<sport>Basketball</sport>
 		<liga>Euroleague</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>06</round>
 		<court/>
@@ -296,7 +296,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Thursday</day>
-		<date>2014-11-20</date>
+		<date>2015-11-20</date>
 		<start>
 			<time>20:45</time>
 			<offset>na</offset>
@@ -331,7 +331,7 @@
 		<sport>Soccer</sport>
 		<liga>UKR Premier League</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>13</round>
 		<court/>
@@ -341,7 +341,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Friday</day>
-		<date>2014-11-21</date>
+		<date>2015-11-21</date>
 		<start>
 			<time>18:00</time>
 			<offset>na</offset>
@@ -376,7 +376,7 @@
 		<sport>Soccer</sport>
 		<liga>AUT Austrian 1. Liga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>19</round>
 		<court/>
@@ -386,7 +386,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Friday</day>
-		<date>2014-11-21</date>
+		<date>2015-11-21</date>
 		<start>
 			<time>18:30</time>
 			<offset>na</offset>
@@ -421,7 +421,7 @@
 		<sport>Soccer</sport>
 		<liga>AUT Austrian 1. Liga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>19</round>
 		<court/>
@@ -431,7 +431,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Friday</day>
-		<date>2014-11-21</date>
+		<date>2015-11-21</date>
 		<start>
 			<time>18:30</time>
 			<offset>na</offset>
@@ -466,7 +466,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German 2. Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>14</round>
 		<court/>
@@ -476,7 +476,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Friday</day>
-		<date>2014-11-21</date>
+		<date>2015-11-21</date>
 		<start>
 			<time>18:30</time>
 			<offset>na</offset>
@@ -511,7 +511,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German 2. Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>14</round>
 		<court/>
@@ -521,7 +521,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Friday</day>
-		<date>2014-11-21</date>
+		<date>2015-11-21</date>
 		<start>
 			<time>18:30</time>
 			<offset>na</offset>
@@ -556,7 +556,7 @@
 		<sport>Basketball</sport>
 		<liga>Euroleague</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>06</round>
 		<court/>
@@ -566,7 +566,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Friday</day>
-		<date>2014-11-21</date>
+		<date>2015-11-21</date>
 		<start>
 			<time>18:45</time>
 			<offset>na</offset>
@@ -601,7 +601,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German 2. Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>14</round>
 		<court/>
@@ -611,7 +611,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Friday</day>
-		<date>2014-11-21</date>
+		<date>2015-11-21</date>
 		<start>
 			<time>20:30</time>
 			<offset>na</offset>
@@ -646,7 +646,7 @@
 		<sport>Soccer</sport>
 		<liga>ESP Primera Division</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -656,7 +656,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Friday</day>
-		<date>2014-11-21</date>
+		<date>2015-11-21</date>
 		<start>
 			<time>20:45</time>
 			<offset>na</offset>
@@ -691,7 +691,7 @@
 		<sport>Soccer</sport>
 		<liga>CHN Chinese FA Cup</liga>
 		<competition/>
-		<saison>2014</saison>
+		<saison>2015</saison>
 		<pool/>
 		<round>2nd Leg</round>
 		<court/>
@@ -701,7 +701,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>08:00</time>
 			<offset>na</offset>
@@ -736,7 +736,7 @@
 		<sport>Basketball</sport>
 		<liga>JPN Japanese bj League</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round/>
 		<court/>
@@ -746,7 +746,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>09:00</time>
 			<offset>na</offset>
@@ -781,7 +781,7 @@
 		<sport>Basketball</sport>
 		<liga>JPN Japanese bj League</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round/>
 		<court/>
@@ -791,7 +791,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>10:00</time>
 			<offset>na</offset>
@@ -826,7 +826,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German 2. Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>14</round>
 		<court/>
@@ -836,7 +836,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>13:00</time>
 			<offset>na</offset>
@@ -871,7 +871,7 @@
 		<sport>Soccer</sport>
 		<liga>SVN Slovenian PrvaLiga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>18</round>
 		<court/>
@@ -881,7 +881,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>14:00</time>
 			<offset>na</offset>
@@ -916,7 +916,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -926,7 +926,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>15:30</time>
 			<offset>na</offset>
@@ -961,7 +961,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -971,7 +971,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>15:30</time>
 			<offset>na</offset>
@@ -1006,7 +1006,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -1016,7 +1016,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>15:30</time>
 			<offset>na</offset>
@@ -1051,7 +1051,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -1061,7 +1061,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>15:30</time>
 			<offset>na</offset>
@@ -1096,7 +1096,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -1106,7 +1106,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>15:30</time>
 			<offset>na</offset>
@@ -1141,7 +1141,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -1151,7 +1151,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>15:30</time>
 			<offset>na</offset>
@@ -1186,7 +1186,7 @@
 		<sport>Soccer</sport>
 		<liga>ESP Primera Division</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -1196,7 +1196,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>16:00</time>
 			<offset>na</offset>
@@ -1231,7 +1231,7 @@
 		<sport>Soccer</sport>
 		<liga>AUT Austrian Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>16</round>
 		<court/>
@@ -1241,7 +1241,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>16:00</time>
 			<offset>na</offset>
@@ -1276,7 +1276,7 @@
 		<sport>Soccer</sport>
 		<liga>UKR Premier League</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>13</round>
 		<court/>
@@ -1286,7 +1286,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>16:00</time>
 			<offset>na</offset>
@@ -1321,7 +1321,7 @@
 		<sport>Soccer</sport>
 		<liga>ESP Primera Division</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -1331,7 +1331,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>18:00</time>
 			<offset>na</offset>
@@ -1366,7 +1366,7 @@
 		<sport>Soccer</sport>
 		<liga>ESP Segunda Division</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>14</round>
 		<court/>
@@ -1376,7 +1376,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>18:00</time>
 			<offset>na</offset>
@@ -1411,7 +1411,7 @@
 		<sport>Soccer</sport>
 		<liga>AUT Austrian Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>16</round>
 		<court/>
@@ -1421,7 +1421,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>18:30</time>
 			<offset>na</offset>
@@ -1456,7 +1456,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -1466,7 +1466,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>18:30</time>
 			<offset>na</offset>
@@ -1501,7 +1501,7 @@
 		<sport>Soccer</sport>
 		<liga>ESP Primera Division</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -1511,7 +1511,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>20:00</time>
 			<offset>na</offset>
@@ -1546,7 +1546,7 @@
 		<sport>Soccer</sport>
 		<liga>CHE Swiss Super League</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>16</round>
 		<court/>
@@ -1556,7 +1556,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>20:00</time>
 			<offset>na</offset>
@@ -1591,7 +1591,7 @@
 		<sport>Soccer</sport>
 		<liga>ESP Primera Division</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -1601,7 +1601,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Saturday</day>
-		<date>2014-11-22</date>
+		<date>2015-11-22</date>
 		<start>
 			<time>22:00</time>
 			<offset>na</offset>
@@ -1636,7 +1636,7 @@
 		<sport>Soccer</sport>
 		<liga>ESP Primera Division</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -1646,7 +1646,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Sunday</day>
-		<date>2014-11-23</date>
+		<date>2015-11-23</date>
 		<start>
 			<time>12:00</time>
 			<offset>na</offset>
@@ -1681,7 +1681,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German 2. Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>14</round>
 		<court/>
@@ -1691,7 +1691,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Sunday</day>
-		<date>2014-11-23</date>
+		<date>2015-11-23</date>
 		<start>
 			<time>13:30</time>
 			<offset>na</offset>
@@ -1726,7 +1726,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German 2. Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>14</round>
 		<court/>
@@ -1736,7 +1736,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Sunday</day>
-		<date>2014-11-23</date>
+		<date>2015-11-23</date>
 		<start>
 			<time>13:30</time>
 			<offset>na</offset>
@@ -1771,7 +1771,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German 2. Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>14</round>
 		<court/>
@@ -1781,7 +1781,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Sunday</day>
-		<date>2014-11-23</date>
+		<date>2015-11-23</date>
 		<start>
 			<time>13:30</time>
 			<offset>na</offset>
@@ -1816,7 +1816,7 @@
 		<sport>Soccer</sport>
 		<liga>CHE Swiss Super League</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>16</round>
 		<court/>
@@ -1826,7 +1826,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Sunday</day>
-		<date>2014-11-23</date>
+		<date>2015-11-23</date>
 		<start>
 			<time>13:45</time>
 			<offset>na</offset>
@@ -1861,7 +1861,7 @@
 		<sport>Basketball</sport>
 		<liga>GER Basketball Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>10</round>
 		<court/>
@@ -1871,7 +1871,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Sunday</day>
-		<date>2014-11-23</date>
+		<date>2015-11-23</date>
 		<start>
 			<time>15:00</time>
 			<offset>na</offset>
@@ -1906,7 +1906,7 @@
 		<sport>Soccer</sport>
 		<liga>AUT Austrian Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>16</round>
 		<court/>
@@ -1916,7 +1916,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Sunday</day>
-		<date>2014-11-23</date>
+		<date>2015-11-23</date>
 		<start>
 			<time>16:30</time>
 			<offset>na</offset>
@@ -1951,7 +1951,7 @@
 		<sport>Soccer</sport>
 		<liga>ESP Segunda Division</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>14</round>
 		<court/>
@@ -1961,7 +1961,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Sunday</day>
-		<date>2014-11-23</date>
+		<date>2015-11-23</date>
 		<start>
 			<time>17:00</time>
 			<offset>na</offset>
@@ -1996,7 +1996,7 @@
 		<sport>Soccer</sport>
 		<liga>GRE Greek Football League 2nd Division</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>06</round>
 		<court/>
@@ -2006,7 +2006,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Sunday</day>
-		<date>2014-11-23</date>
+		<date>2015-11-23</date>
 		<start>
 			<time>17:00</time>
 			<offset>na</offset>
@@ -2041,7 +2041,7 @@
 		<sport>Soccer</sport>
 		<liga>GER German Bundesliga</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -2051,7 +2051,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Sunday</day>
-		<date>2014-11-23</date>
+		<date>2015-11-23</date>
 		<start>
 			<time>17:30</time>
 			<offset>na</offset>
@@ -2086,7 +2086,7 @@
 		<sport>Soccer</sport>
 		<liga>ESP Primera Division</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -2096,7 +2096,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Sunday</day>
-		<date>2014-11-23</date>
+		<date>2015-11-23</date>
 		<start>
 			<time>19:00</time>
 			<offset>na</offset>
@@ -2131,7 +2131,7 @@
 		<sport>Basketball</sport>
 		<liga>ITA Legabasket Serie A</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>07</round>
 		<court/>
@@ -2141,7 +2141,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Sunday</day>
-		<date>2014-11-23</date>
+		<date>2015-11-23</date>
 		<start>
 			<time>20:30</time>
 			<offset>na</offset>
@@ -2176,7 +2176,7 @@
 		<sport>Soccer</sport>
 		<liga>ESP Primera Division</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>12</round>
 		<court/>
@@ -2186,7 +2186,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Sunday</day>
-		<date>2014-11-23</date>
+		<date>2015-11-23</date>
 		<start>
 			<time>21:00</time>
 			<offset>na</offset>
@@ -2221,7 +2221,7 @@
 		<sport>Soccer</sport>
 		<liga>GRE Greek Football League 2nd Division</liga>
 		<competition/>
-		<saison>2014/15</saison>
+		<saison>2015/15</saison>
 		<pool/>
 		<round>06</round>
 		<court/>
@@ -2231,7 +2231,7 @@
 	</sportinfo>
 	<schedule>
 		<day>Monday</day>
-		<date>2014-11-24</date>
+		<date>2015-11-24</date>
 		<start>
 			<time>17:00</time>
 			<offset>na</offset>

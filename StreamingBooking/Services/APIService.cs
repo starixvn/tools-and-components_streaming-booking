@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Xml;
 using System.Net;
-using StreamingBooking.Models;
-using System.Xml.Linq;
 using System.Web.Hosting;
+using System.Xml.Linq;
+using StreamingBooking.Models;
 
 namespace StreamingBooking.Services
 {
@@ -78,7 +76,7 @@ namespace StreamingBooking.Services
             return doc;
         }
 
-        public static List<StreamModel> ProcessEntityElements(XDocument dataResponsed)
+        public static List<StreamModel> ProcessEntityElements(string partnerName, XDocument dataResponsed)
         {
             var listOfStream = new List<StreamModel>();
 
@@ -111,7 +109,13 @@ namespace StreamingBooking.Services
                         KickOffDate = kickOffDate,
                         LeagueName = leagueName,
                         StreamId = streamId,
-                        SportName = sportName
+                        SportName = sportName,
+                        Bodog = partnerName == Bodog,
+                        Dafabet = partnerName == Dafabet,
+                        Fun88 = partnerName == Fun88,
+                        IBCBet = partnerName == IBCBet,
+                        Macaubet = partnerName == Macaubet,
+                        TLC = partnerName == Tlc88
                     });
             }
 
@@ -126,42 +130,42 @@ namespace StreamingBooking.Services
             {
                 PartnerId = 31,
                 PartnerName = APIService.IBCBet,
-                Authentication = "ET31DPYd",
+                APISecret = "ET31DPYd",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.0.xml")
             });
             licensee.Add(new LicenseeModel
             {
                 PartnerId = 47,
                 PartnerName = APIService.Bodog,
-                Authentication = "BYE1QRgW",
+                APISecret = "BYE1QRgW",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.1.xml")
             });
             licensee.Add(new LicenseeModel
             {
                 PartnerId = 42,
                 PartnerName = APIService.Dafabet,
-                Authentication = "k2vSVp6W",
+                APISecret = "k2vSVp6W",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.2.xml")
             });
             licensee.Add(new LicenseeModel
             {
                 PartnerId = 45,
                 PartnerName = APIService.Fun88,
-                Authentication = "ENCmG6t1",
+                APISecret = "ENCmG6t1",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.3.xml")
             });
             licensee.Add(new LicenseeModel
             {
                 PartnerId = 38,
                 PartnerName = APIService.Macaubet,
-                Authentication = "UxcjUrMw",
+                APISecret = "UxcjUrMw",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.4.xml")
             });
             licensee.Add(new LicenseeModel
             {
                 PartnerId = 51,
                 PartnerName = APIService.Tlc88,
-                Authentication = "uG4pxEKM",
+                APISecret = "uG4pxEKM",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.5.xml")
             });
 
