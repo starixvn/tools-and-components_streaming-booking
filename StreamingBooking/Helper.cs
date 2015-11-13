@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace StreamingBooking
 {
@@ -11,23 +9,14 @@ namespace StreamingBooking
         public static IList<string> ReadFile(string filePath)
         {
             IList<string> lines = new List<string>();
+
             if (File.Exists(filePath))
             {
-                FileStream fielStream = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite);
-                StreamReader sr = new StreamReader(fielStream);
-                string line = string.Empty;
-                while (!sr.EndOfStream)
-                {
-                    line = sr.ReadLine();
-                    lines.Add(line);
-                }
-
-                sr.Close();
-                fielStream.Close();
+                lines = File.ReadAllLines(filePath).ToList();
             }
             else
             {
-                File.CreateText(filePath);
+                File.WriteAllText(filePath, string.Empty);
             }
 
             return lines;
@@ -39,27 +28,22 @@ namespace StreamingBooking
 
             if (File.Exists(filePath))
             {
-                FileStream fielStream = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite);
+                string[] lines = File.ReadAllLines(filePath);
 
-                StreamReader sr = new StreamReader(fielStream);
-                string line = string.Empty;
-                while (!sr.EndOfStream)
+                foreach (var line in lines)
                 {
-                    line = sr.ReadLine();
                     var streamId = line.Substring(0, line.IndexOf(':'));
                     var remark = line.Substring(line.IndexOf(':') + 1, line.Length - line.IndexOf(':') - 1);
+
                     if (!data.Keys.Contains(int.Parse(streamId)))
                     {
                         data.Add(int.Parse(streamId), remark);
                     }
                 }
-
-                sr.Close();
-                fielStream.Close();
             }
             else
             {
-                File.CreateText(filePath);
+                File.WriteAllText(filePath, string.Empty);
             }
 
             return data;
