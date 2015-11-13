@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Fanex.Logging;
 
 namespace StreamingBooking
 {
@@ -22,6 +21,21 @@ namespace StreamingBooking
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            if (!Request.IsLocal)
+            {
+                Exception ex = Server.GetLastError().GetBaseException();
+                string message = ex.Message +
+                        "\r\nSource: " + ex.Source +
+                        "\r\nDomain: " + HttpContext.Current.Request.Headers["Host"] +
+                        "\r\nTargetSite: " + ex.TargetSite +
+                        "\r\nStackTrace: " + ex.StackTrace;
+
+                LogService.Error(message);
+            }
         }
     }
 }
