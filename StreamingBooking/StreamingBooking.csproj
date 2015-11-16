@@ -399,6 +399,9 @@
   <ItemGroup>
     <None Include="Content\DataTables\css\dataTables.jqueryui.scss" />
     <None Include="Content\DataTables\css\dataTables.responsive.scss" />
+    <Content Include="Web.local.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="images\Sorting icons.psd" />
   </ItemGroup>
   <PropertyGroup>
