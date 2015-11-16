@@ -14,9 +14,9 @@
     {
         private const string ALG = "HmacMD5";
 
-        private const string ALog = "ALog";
-        private const string Fun88 = "Fun88";
-        private const string Mayfair = "Mayfair";
+        public const string ALog = "ALog";
+        public const string Fun88 = "Fun88";
+        public const string Mayfair = "Mayfair";
 
         public static IList<LicenseeModel> Licensees()
         {

@@ -11,9 +11,7 @@
         }).ajaxError(function (xhr, status) {
             $("#ajax-debug").text(status.responseText);
             alert("There is an ajax error, please view ajax-debug content for further information");
-        });
-
-        siteObject.search();
+        });        
 
         $('#fromDate').on('change', function () {
             siteObject.search();
@@ -24,6 +22,12 @@
         });
 
         $('#leagues').on('change', function () {
+            siteObject.search();
+        });
+
+        $('#licensees').on('change', function () {
+            $('#leagues').val("");
+            
             siteObject.search();
         });
 
@@ -44,6 +48,10 @@
 
             siteObject.UpdateRowActive(streamId);
         });
+
+        $("#licensees").prepend('<option selected value="">---All Licensees---</option>');
+
+        siteObject.search();
     };
 
     siteObject.getFullUrl = function (relativePath) {
@@ -66,13 +74,15 @@
         var fromDate = $('#fromDate').val();
         var toDate = $('#toDate').val();
         var league = $('#leagues').val();
+        var licensee = $('#licensees').val();
 
         $.ajax({
             url: siteObject.getFullUrl("Home/Search"),
             data: {
                 fromDate: fromDate,
                 toDate: toDate,
-                league: league
+                league: league,
+                licensee: licensee
             },
             type: 'POST',
             success: function (data) {
@@ -93,8 +103,13 @@
     };
 
     siteObject.GetLeagues = function (league) {
+        var licensee = $('#licensees').val();
+
         $.ajax({
             url: siteObject.getFullUrl("Home/GetLeagues"),
+            data: {
+                licensee: licensee
+            },
             type: 'POST',
             success: function (data) {
                 $('#leagues').find('option').remove();

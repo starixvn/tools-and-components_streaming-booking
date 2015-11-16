@@ -27,20 +27,33 @@ namespace StreamingBooking.Controllers
                 currentDay = currentDay.AddDays(1);
             }
 
+            var licensees = new List<string> {                  
+                    APIService.Bodog,
+                    APIService.Dafabet,
+                    APIService.Fun88,
+                    APIService.IBCBet,
+                    APIService.Macaubet,
+                    APIService.Tlc88,
+                    IMGAPIService.ALog,
+                    IMGAPIService.Mayfair
+            };
+            licensees = licensees.OrderBy(x => x).ToList();
+
             var model = new StreamViewModel
             {
                 From = _listOfDates,
                 To = _listOfDates,
-                Leagues = new List<string>()
+                Leagues = new List<string>(),
+                Licensees = licensees
             };
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Search(string fromDate, string toDate, string league)
+        public ActionResult Search(string fromDate, string toDate, string league, string licensee)
         {
-            _streams = GetStreamData();
+            _streams = GetStreamData(licensee);
 
             var matchedStreamData = _streams
                                 .Where(x => x.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
@@ -57,11 +70,11 @@ namespace StreamingBooking.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetLeagues()
+        public ActionResult GetLeagues(string licensee)
         {
             if (_streams == null)
             {
-                _streams = GetStreamData();
+                _streams = GetStreamData(licensee);
             }
 
             string fromDate = _listOfDates.First();
@@ -93,23 +106,28 @@ namespace StreamingBooking.Controllers
             Helper.WriteRemarkFile(filePath, streamId, remark);
         }
 
-        private List<StreamModel> GetStreamData()
+        private List<StreamModel> GetStreamData(string filterLicensee)
         {
             var streams = new List<StreamModel>();
 
-            GetStreamEventDataFromUNASApi(streams);
+            GetStreamEventDataFromUNASApi(filterLicensee, streams);
 
-            GetStreamEventDataFromIMGApi(streams);
+            GetStreamEventDataFromIMGApi(filterLicensee, streams);
 
             streams = streams.Distinct(new StreamingComparer()).ToList();
 
             return streams;
         }
 
-        private void GetStreamEventDataFromIMGApi(List<StreamModel> streams)
+        private void GetStreamEventDataFromIMGApi(string filterLicensee, List<StreamModel> streams)
         {
-            var licensees = IMGAPIService.Licensees();
             string imgApiUrl = ConfigurationManager.AppSettings["IMG.API.Path"];
+            var licensees = IMGAPIService.Licensees();
+
+            if (!string.IsNullOrWhiteSpace(filterLicensee))
+            {
+                licensees = licensees.Where(x => x.PartnerName.Equals(filterLicensee, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
 
             foreach (var licensee in licensees)
             {
@@ -119,9 +137,14 @@ namespace StreamingBooking.Controllers
             }
         }
 
-        private static void GetStreamEventDataFromUNASApi(List<StreamModel> streams)
+        private static void GetStreamEventDataFromUNASApi(string filterLicensee, List<StreamModel> streams)
         {
             var licensees = APIService.Licensees();
+
+            if (!string.IsNullOrWhiteSpace(filterLicensee))
+            {
+                licensees = licensees.Where(x => x.PartnerName.Equals(filterLicensee, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
 
             foreach (var licensee in licensees)
             {
