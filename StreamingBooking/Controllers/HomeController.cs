@@ -12,6 +12,7 @@ namespace StreamingBooking.Controllers
     public class HomeController : Controller
     {
         private static List<StreamModel> _streams;
+        private static List<string> _listOfDates;
 
         public ActionResult Index()
         {
@@ -19,17 +20,17 @@ namespace StreamingBooking.Controllers
             var currentDay = DateTime.Now;
             var nextDay = currentDay.AddDays(days);
 
-            var listOfDates = new List<string>();
+            _listOfDates = new List<string>();
             while (currentDay < nextDay)
             {
-                listOfDates.Add(currentDay.ToString("MM/dd/yyyy"));
+                _listOfDates.Add(currentDay.ToString("MM/dd/yyyy"));
                 currentDay = currentDay.AddDays(1);
             }
 
             var model = new StreamViewModel
             {
-                From = listOfDates,
-                To = listOfDates,
+                From = _listOfDates,
+                To = _listOfDates,
                 Leagues = new List<string>()
             };
 
@@ -58,7 +59,20 @@ namespace StreamingBooking.Controllers
         [HttpPost]
         public ActionResult GetLeagues()
         {
-            var leagues = _streams.GroupBy(x => x.LeagueName).Select(s => new { name = s.Key, value = s.Key });
+            if (_streams == null)
+            {
+                _streams = GetStreamData();
+            }
+
+            string fromDate = _listOfDates.First();
+            string toDate = _listOfDates.Last();
+
+            var matchedStreamData = _streams
+                                        .Where(x => x.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
+                                                && x.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null))
+                                        .ToList();
+
+            var leagues = matchedStreamData.GroupBy(x => x.LeagueName).Select(s => new { name = s.Key, value = s.Key });
 
             return Json(leagues, JsonRequestBehavior.AllowGet);
         }
