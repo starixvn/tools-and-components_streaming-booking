@@ -402,6 +402,9 @@
     <Content Include="Web.local.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Web.pro.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="images\Sorting icons.psd" />
   </ItemGroup>
   <PropertyGroup>
