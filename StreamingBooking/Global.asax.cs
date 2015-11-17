@@ -25,17 +25,14 @@ namespace StreamingBooking
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            if (!Request.IsLocal)
-            {
-                Exception ex = Server.GetLastError().GetBaseException();
-                string message = ex.Message +
-                        "\r\nSource: " + ex.Source +
-                        "\r\nDomain: " + HttpContext.Current.Request.Headers["Host"] +
-                        "\r\nTargetSite: " + ex.TargetSite +
-                        "\r\nStackTrace: " + ex.StackTrace;
+            Exception ex = Server.GetLastError().GetBaseException();
+            string message = ex.Message +
+                    "\r\nSource: " + ex.Source +
+                    "\r\nDomain: " + HttpContext.Current.Request.Headers["Host"] +
+                    "\r\nTargetSite: " + ex.TargetSite +
+                    "\r\nStackTrace: " + ex.StackTrace;
 
-                LogService.Error(message);
-            }
+            LogService.Error(message);
         }
     }
 }
