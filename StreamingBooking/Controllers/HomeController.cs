@@ -12,19 +12,16 @@ namespace StreamingBooking.Controllers
 {
     public class HomeController : Controller
     {
-        private static List<StreamModel> _streams;
-        private static List<string> _listOfDates;
-
         public ActionResult Index()
         {
             var days = Convert.ToInt32(ConfigurationManager.AppSettings["API.Days"]);
             var currentDay = DateTime.Now;
             var nextDay = currentDay.AddDays(days);
 
-            _listOfDates = new List<string>();
+            SessionManager.FilterDates = new List<string>();
             while (currentDay < nextDay)
             {
-                _listOfDates.Add(currentDay.ToString("MM/dd/yyyy"));
+                SessionManager.FilterDates.Add(currentDay.ToString("MM/dd/yyyy"));
                 currentDay = currentDay.AddDays(1);
             }
 
@@ -33,8 +30,8 @@ namespace StreamingBooking.Controllers
 
             var model = new StreamViewModel
             {
-                From = _listOfDates,
-                To = _listOfDates,
+                From = SessionManager.FilterDates,
+                To = SessionManager.FilterDates,
                 Leagues = new List<string>(),
                 Licensees = licensees,
                 Providers = providers
@@ -52,13 +49,13 @@ namespace StreamingBooking.Controllers
             int provider)
         {
             List<StreamModel> allStreams = GetStreamData(provider, licensee);
-            _streams = allStreams.Distinct(new StreamingComparer()).ToList();
+            SessionManager.Streams = allStreams.Distinct(new StreamingComparer()).ToList();
 
-            var matchedStreamData = _streams
-                                    .Where(x => x.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
-                                        && x.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null)
-                                        && (!string.IsNullOrWhiteSpace(league) ? x.LeagueName == league : x.LeagueName == x.LeagueName))
-                                    .ToList();
+            var matchedStreamData = SessionManager.Streams
+                                        .Where(x => x.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
+                                            && x.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null)
+                                            && (!string.IsNullOrWhiteSpace(league) ? x.LeagueName == league : x.LeagueName == x.LeagueName))
+                                        .ToList();
 
             var model = new StreamViewModel()
             {
@@ -72,15 +69,15 @@ namespace StreamingBooking.Controllers
         [HttpGet]
         public JsonResult GetLeagues(int provider, string licensee)
         {
-            if (_streams == null)
+            if (SessionManager.Streams == null)
             {
-                _streams = GetStreamData(provider, licensee);
+                SessionManager.Streams = GetStreamData(provider, licensee);
             }
 
-            string fromDate = _listOfDates.First();
-            string toDate = _listOfDates.Last();
+            string fromDate = SessionManager.FilterDates.First();
+            string toDate = SessionManager.FilterDates.Last();
 
-            var matchedStreamData = _streams
+            var matchedStreamData = SessionManager.Streams
                                         .Where(x => x.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
                                                 && x.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null))
                                         .ToList();
