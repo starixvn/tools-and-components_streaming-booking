@@ -43,8 +43,14 @@
     </script>
 }
 <div class="filter">
-    <table>
+    <table cellspacing="10">
         <tr>
+            <td class="lable">
+                Provider
+            </td>
+            <td class="text">
+                @Html.DropDownList("providers", new SelectList(Model.Providers, "Value", "Text"))
+            </td>
             <td class="lable">
                 Licensee
             </td>
@@ -57,6 +63,8 @@
             <td class="text">
                 @Html.DropDownList("leagues", new SelectList(Model.Leagues))
             </td>
+        </tr>
+        <tr>
             <td class="lable">
                 From
             </td>

@@ -11,7 +11,7 @@
         }).ajaxError(function (xhr, status) {
             $("#ajax-debug").text(status.responseText);
             alert("There is an ajax error, please view ajax-debug content for further information");
-        });        
+        });
 
         $('#fromDate').on('change', function () {
             siteObject.search();
@@ -27,7 +27,16 @@
 
         $('#licensees').on('change', function () {
             $('#leagues').val("");
-            
+
+            siteObject.search();
+        });
+
+        $('#providers').on('change', function () {
+            $('#licensees').val("");
+            $('#leagues').val("");
+
+            siteObject.getLicensees();
+
             siteObject.search();
         });
 
@@ -48,6 +57,8 @@
 
             siteObject.UpdateRowActive(streamId);
         });
+
+        $("#providers").prepend('<option selected value="0">---All Providers---</option>');
 
         $("#licensees").prepend('<option selected value="">---All Licensees---</option>');
 
@@ -75,6 +86,7 @@
         var toDate = $('#toDate').val();
         var league = $('#leagues').val();
         var licensee = $('#licensees').val();
+        var provider = $('#providers').val();
 
         $.ajax({
             url: siteObject.getFullUrl("Home/Search"),
@@ -82,7 +94,8 @@
                 fromDate: fromDate,
                 toDate: toDate,
                 league: league,
-                licensee: licensee
+                licensee: licensee,
+                provider: provider
             },
             type: 'POST',
             success: function (data) {
@@ -104,11 +117,13 @@
 
     siteObject.GetLeagues = function (league) {
         var licensee = $('#licensees').val();
+        var provider = $('#providers').val();
 
         $.ajax({
             url: siteObject.getFullUrl("Home/GetLeagues"),
             data: {
-                licensee: licensee
+                licensee: licensee,
+                provider: provider
             },
             type: 'POST',
             success: function (data) {
@@ -128,6 +143,27 @@
                     else {
                         $('#leagues').append($('<option></option>').val(item.value).html(item.name));
                     }
+                });
+            }
+        });
+    };
+
+    siteObject.getLicensees = function () {
+        var provider = $('#providers').val();
+
+        $.ajax({
+            url: siteObject.getFullUrl("Home/GetLicenseesByProvider"),
+            data: {
+                provider: provider
+            },
+            type: 'GET',
+            success: function (data) {
+                $('#licensees').find('option').remove();
+
+                $('#licensees').append($('<option selected></option>').val('').html('---All Licensees---'));
+
+                $.each(data, function (index, item) {
+                    $('#licensees').append($('<option></option>').val(item).html(item));
                 });
             }
         });

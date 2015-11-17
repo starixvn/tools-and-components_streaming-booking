@@ -8,13 +8,13 @@
     var remarks = StreamingBooking.Helper.ReadRemarkFile(ConfigurationManager.AppSettings["StreamingRemarkPath"]);
 }
 @model StreamingBooking.Models.StreamViewModel
-@if (Model.Streams.Count != 0)
+@if (Model.DistinctStreams.Count != 0)
 {
     int counter = 0;
     var activeRowClass = string.Empty;
     var oddRowClass = string.Empty;
 
-    foreach (var item in Model.Streams)
+    foreach (var item in Model.DistinctStreams)
     {
         counter++;
         activeRowClass = activeRows.Contains(item.StreamId.ToString()) ? "active" : string.Empty;
@@ -39,49 +39,49 @@
             @item.AwayName
         </td>
         <td align="center">
-            @if (item.IBCBet)
+            @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.IBCBet))
             { 
                 <span>Booked</span>
             }
         </td>
         <td align="center">
-            @if (item.Bodog)
+            @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.Bodog))
             { 
                 <span>Booked</span>
             }
         </td>
         <td align="center">
-            @if (item.Dafabet)
+            @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.Dafabet))
             { 
                 <span>Booked</span>
             }
         </td>
         <td align="center">
-            @if (item.Fun88)
+            @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.Fun88))
             { 
                 <span>Booked</span>
             }
         </td>
         <td align="center">
-            @if (item.Macaubet)
+            @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.Macaubet))
             { 
                 <span>Booked</span>
             }
         </td>
         <td align="center">
-            @if (item.TLC)
+            @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.TLC))
             { 
                 <span>Booked</span>
             }
         </td>
         <td align="center">
-            @if (item.ALog)
+            @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.ALog))
             { 
                 <span>Booked</span>
             }
         </td>
         <td align="center">
-            @if (item.Mayfair)
+            @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.Mayfair))
             { 
                 <span>Booked</span>
             }
