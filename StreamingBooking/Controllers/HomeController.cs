@@ -69,8 +69,8 @@ namespace StreamingBooking.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public ActionResult GetLeagues(int provider, string licensee)
+        [HttpGet]
+        public JsonResult GetLeagues(int provider, string licensee)
         {
             if (_streams == null)
             {
@@ -85,7 +85,7 @@ namespace StreamingBooking.Controllers
                                                 && x.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null))
                                         .ToList();
 
-            var leagues = matchedStreamData.GroupBy(x => x.LeagueName).Select(s => new { name = s.Key, value = s.Key });
+            var leagues = matchedStreamData.GroupBy(x => x.LeagueName).Select(s => s.Key);
 
             return Json(leagues, JsonRequestBehavior.AllowGet);
         }

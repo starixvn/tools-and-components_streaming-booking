@@ -125,7 +125,7 @@
                 licensee: licensee,
                 provider: provider
             },
-            type: 'POST',
+            type: 'GET',
             success: function (data) {
                 $('#leagues').find('option').remove();
 
@@ -137,11 +137,11 @@
                 }
 
                 $.each(data, function (index, item) {
-                    if (league == item.value) {
-                        $('#leagues').append($('<option selected></option>').val(item.value).html(item.name));
+                    if (league == item) {
+                        $('#leagues').append($('<option selected></option>').val(item).html(item));
                     }
                     else {
-                        $('#leagues').append($('<option></option>').val(item.value).html(item.name));
+                        $('#leagues').append($('<option></option>').val(item).html(item));
                     }
                 });
             }
