@@ -62,7 +62,7 @@
 
         $("#licensees").prepend('<option selected value="">---All Licensees---</option>');
 
-        siteObject.search();
+        siteObject.search(true);
     };
 
     siteObject.getFullUrl = function (relativePath) {
@@ -81,7 +81,7 @@
         });
     };
 
-    siteObject.search = function () {
+    siteObject.search = function (isAutoRefresh) {
         var fromDate = $('#fromDate').val();
         var toDate = $('#toDate').val();
         var league = $('#leagues').val();
@@ -103,16 +103,20 @@
             },
             complete: function () {
                 siteObject.GetLeagues(league);
-                siteObject.AutoRefresh();
                 siteObject.Remark();
+
+                if (isAutoRefresh) {
+                    siteObject.AutoRefresh();
+                }
             }
         });
     };
 
     siteObject.AutoRefresh = function () {
-        var timeOut = parseInt($('#auto-refresh').val());
+        var timeOut = parseInt($('#auto-refresh').val()),
+            isAutoRefresh = true;
 
-        setTimeout(function () { SITE.search(); }, timeOut * 60000);
+        setTimeout(function () { SITE.search(isAutoRefresh); }, timeOut * 60000);
     };
 
     siteObject.GetLeagues = function (league) {
