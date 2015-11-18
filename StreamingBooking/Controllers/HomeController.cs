@@ -74,16 +74,22 @@ namespace StreamingBooking.Controllers
                 SessionManager.Streams = GetStreamData(provider, licensee);
             }
 
-            string fromDate = SessionManager.FilterDates.FirstOrDefault();
-            string toDate = SessionManager.FilterDates.LastOrDefault();
             List<StreamModel> matchedStreamData = SessionManager.Streams;
 
-            if (!string.IsNullOrWhiteSpace(fromDate) && !string.IsNullOrWhiteSpace(toDate))
+            if (SessionManager.FilterDates != null)
             {
-                matchedStreamData = SessionManager.Streams
-                                           .Where(x => x.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
-                                                   && x.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null))
-                                           .ToList();
+                string fromDate = SessionManager.FilterDates.FirstOrDefault();
+                string toDate = SessionManager.FilterDates.LastOrDefault();
+
+                if (!string.IsNullOrWhiteSpace(fromDate) && !string.IsNullOrWhiteSpace(toDate))
+                {
+                    var filterFromDate = Convert.ToDateTime(fromDate);
+                    var filterToDate = Convert.ToDateTime(toDate);
+
+                    matchedStreamData = SessionManager.Streams
+                                               .Where(x => x.KickOffDate >= filterFromDate && x.KickOffDate <= filterToDate)
+                                               .ToList();
+                }
             }
 
             var leagues = matchedStreamData.GroupBy(x => x.LeagueName).Select(s => s.Key).ToList();
