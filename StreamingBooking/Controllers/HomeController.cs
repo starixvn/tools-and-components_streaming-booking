@@ -74,15 +74,15 @@ namespace StreamingBooking.Controllers
                 SessionManager.Streams = GetStreamData(provider, licensee);
             }
 
-            //string fromDate = SessionManager.FilterDates.First();
-            //string toDate = SessionManager.FilterDates.Last();
+            string fromDate = SessionManager.FilterDates.First();
+            string toDate = SessionManager.FilterDates.Last();
 
-            //var matchedStreamData = SessionManager.Streams
-            //                            .Where(x => x.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
-            //                                    && x.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null))
-            //                            .ToList();
+            var matchedStreamData = SessionManager.Streams
+                                        .Where(x => x.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
+                                                && x.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null))
+                                        .ToList();
 
-            var leagues = SessionManager.Streams.GroupBy(x => x.LeagueName).Select(s => s.Key).ToList();
+            var leagues = matchedStreamData.GroupBy(x => x.LeagueName).Select(s => s.Key).ToList();
 
             return Json(leagues, JsonRequestBehavior.AllowGet);
         }
