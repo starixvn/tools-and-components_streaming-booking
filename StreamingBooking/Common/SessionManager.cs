@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Web;
-using System.Web.SessionState;
-using StreamingBooking.Models;
-namespace StreamingBooking.Common
+﻿namespace StreamingBooking.Common
 {
+    using System.Collections.Generic;
+    using System.Web;
+    using System.Web.SessionState;
+    using StreamingBooking.Models;
+
     public static class SessionManager
     {
         private const string StreamDataKey = "StreamData";
-        private const string FilterDateKey = "FilterDate";
 
         public static HttpSessionState CurrentSession
         {
@@ -28,20 +28,6 @@ namespace StreamingBooking.Common
             set
             {
                 CurrentSession[StreamDataKey] = value;
-            }
-        }
-
-        public static List<string> FilterDates
-        {
-            get
-            {
-                var filterDates = CurrentSession[FilterDateKey] as List<string>;
-
-                return filterDates;
-            }
-            set
-            {
-                CurrentSession[FilterDateKey] = value;
             }
         }
     }

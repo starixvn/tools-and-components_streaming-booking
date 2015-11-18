@@ -18,10 +18,10 @@ namespace StreamingBooking.Controllers
             var currentDay = DateTime.Now;
             var nextDay = currentDay.AddDays(days);
 
-            SessionManager.FilterDates = new List<string>();
+            var filterDates = new List<string>();
             while (currentDay < nextDay)
             {
-                SessionManager.FilterDates.Add(currentDay.ToString("MM/dd/yyyy"));
+                filterDates.Add(currentDay.ToString("MM/dd/yyyy"));
                 currentDay = currentDay.AddDays(1);
             }
 
@@ -30,8 +30,8 @@ namespace StreamingBooking.Controllers
 
             var model = new StreamViewModel
             {
-                From = SessionManager.FilterDates,
-                To = SessionManager.FilterDates,
+                From = filterDates,
+                To = filterDates,
                 Leagues = new List<string>(),
                 Licensees = licensees,
                 Providers = providers
@@ -67,7 +67,7 @@ namespace StreamingBooking.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetLeagues(int provider, string licensee)
+        public JsonResult GetLeagues(int provider, string licensee, string fromDate, string toDate)
         {
             if (SessionManager.Streams == null)
             {
@@ -76,20 +76,14 @@ namespace StreamingBooking.Controllers
 
             List<StreamModel> matchedStreamData = SessionManager.Streams;
 
-            if (SessionManager.FilterDates != null)
+            if (!string.IsNullOrWhiteSpace(fromDate) && !string.IsNullOrWhiteSpace(toDate))
             {
-                string fromDate = SessionManager.FilterDates.FirstOrDefault();
-                string toDate = SessionManager.FilterDates.LastOrDefault();
+                var filterFromDate = Convert.ToDateTime(fromDate);
+                var filterToDate = Convert.ToDateTime(toDate);
 
-                if (!string.IsNullOrWhiteSpace(fromDate) && !string.IsNullOrWhiteSpace(toDate))
-                {
-                    var filterFromDate = Convert.ToDateTime(fromDate);
-                    var filterToDate = Convert.ToDateTime(toDate);
-
-                    matchedStreamData = SessionManager.Streams
-                                               .Where(x => x.KickOffDate >= filterFromDate && x.KickOffDate <= filterToDate)
-                                               .ToList();
-                }
+                matchedStreamData = SessionManager.Streams
+                                           .Where(x => x.KickOffDate >= filterFromDate && x.KickOffDate <= filterToDate)
+                                           .ToList();
             }
 
             var leagues = matchedStreamData.GroupBy(x => x.LeagueName).Select(s => s.Key).ToList();

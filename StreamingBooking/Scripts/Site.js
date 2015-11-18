@@ -122,12 +122,21 @@
     siteObject.GetLeagues = function (league) {
         var licensee = $('#licensees').val();
         var provider = $('#providers').val();
+        var allDates = $('#fromDate option').map(function (idx, opt) { return $(opt).html(); });
+        var fromDate = "", toDate = "";
+
+        if (allDates.length > 0) {
+            fromDate = allDates[0];
+            toDate = allDates[allDates.length - 1];
+        }
 
         $.ajax({
             url: siteObject.getFullUrl("Home/GetLeagues"),
             data: {
                 licensee: licensee,
-                provider: provider
+                provider: provider,
+                fromDate: fromDate,
+                toDate: toDate
             },
             type: 'GET',
             success: function (data) {
