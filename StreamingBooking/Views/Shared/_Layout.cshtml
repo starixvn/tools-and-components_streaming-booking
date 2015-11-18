@@ -1,23 +1,20 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>    
+<head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
 </head>
 <body>
     @RenderBody()
-
     <div id='ajax_loader' class="ajax-loading">
-        <img alt="" src="~/images/loading.gif"/>
+        <img alt="" src="~/images/loading.gif" />
     </div>
-
+    <div id='ajax-debug' class="ajax-debug">
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/datatable")
-    
     @RenderSection("scripts", required: false)
-
-    
 </body>
 </html>

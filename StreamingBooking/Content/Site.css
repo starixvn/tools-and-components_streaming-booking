@@ -93,3 +93,8 @@ table.tbl-data tbody tr.active
     height: 100%;
     opacity: 50%;
 }
+
+.ajax-debug
+{
+    display: none;
+}
