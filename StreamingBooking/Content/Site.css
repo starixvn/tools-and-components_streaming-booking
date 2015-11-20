@@ -98,3 +98,9 @@ table.tbl-data tbody tr.active
 {
     display: none;
 }
+
+.btnSubmit
+{
+    width: 90px;
+    margin-left: 55px;
+}
