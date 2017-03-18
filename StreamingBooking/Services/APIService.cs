@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Hosting;
 using System.Xml.Linq;
+using Fanex.Logging;
 using StreamingBooking.Models;
 
 namespace StreamingBooking.Services
@@ -63,7 +64,6 @@ namespace StreamingBooking.Services
             HttpWebRequest request = WebRequest.Create(requestUrl) as HttpWebRequest;
             HttpWebResponse response = request.GetResponse() as HttpWebResponse;
 
-
             XDocument xmlDoc = XDocument.Load(response.GetResponseStream());
 
             return (xmlDoc);
@@ -93,30 +93,37 @@ namespace StreamingBooking.Services
 
             foreach (XElement el in events)
             {
-                eventId = int.Parse(el.Element("eventid").Value);
-                awayName = el.Element("sportinfo").Element("teamA").Value;
-                homeName = el.Element("sportinfo").Element("teamB").Value;
-                kickOffDate = DateTime.Parse(el.Element("schedule").Element("date").Value);
-                leagueName = el.Element("sportinfo").Element("liga").Value;
-                streamId = int.Parse(el.Element("stream").Element("streamid").Value);
-                sportName = el.Element("sportinfo").Element("sport").Value;
-                listOfStream.Add(
-                    new StreamModel
-                    {
-                        EventId = eventId,
-                        AwayName = awayName,
-                        HomeName = homeName,
-                        KickOffDate = kickOffDate,
-                        LeagueName = leagueName,
-                        StreamId = streamId,
-                        SportName = sportName,
-                        Bodog = partnerName == Bodog,
-                        Dafabet = partnerName == Dafabet,
-                        Fun88 = partnerName == Fun88,
-                        IBCBet = partnerName == IBCBet,
-                        Macaubet = partnerName == Macaubet,
-                        TLC = partnerName == Tlc88
-                    });
+                try
+                {
+                    eventId = int.Parse(el.Element("eventid").Value);
+                    awayName = el.Element("sportinfo").Element("teamA").Value;
+                    homeName = el.Element("sportinfo").Element("teamB").Value;
+                    kickOffDate = DateTime.Parse(el.Element("schedule").Element("date").Value);
+                    leagueName = el.Element("sportinfo").Element("liga").Value;
+                    streamId = int.Parse(el.Element("stream").Element("streamid").Value);
+                    sportName = el.Element("sportinfo").Element("sport").Value;
+                    listOfStream.Add(
+                        new StreamModel
+                        {
+                            EventId = eventId,
+                            AwayName = awayName,
+                            HomeName = homeName,
+                            KickOffDate = kickOffDate,
+                            LeagueName = leagueName,
+                            StreamId = streamId,
+                            SportName = sportName,
+                            Bodog = partnerName == Bodog,
+                            Dafabet = partnerName == Dafabet,
+                            Fun88 = partnerName == Fun88,
+                            IBCBet = partnerName == IBCBet,
+                            Macaubet = partnerName == Macaubet,
+                            TLC = partnerName == Tlc88
+                        });
+                }
+                catch
+                {
+                    throw new NotSupportedException(el.ToString());
+                }
             }
 
             return listOfStream;
