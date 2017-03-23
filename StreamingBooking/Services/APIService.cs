@@ -100,7 +100,7 @@ namespace StreamingBooking.Services
                     homeName = el.Element("sportinfo").Element("teamB").Value;
                     kickOffDate = DateTime.Parse(el.Element("schedule").Element("date").Value);
                     leagueName = el.Element("sportinfo").Element("liga").Value;
-                    streamId = int.Parse(el.Element("stream").Element("streamid").Value);
+                    streamId = el.Element("stream") != null ? int.Parse(el.Element("stream").Element("streamid").Value) : 0;
                     sportName = el.Element("sportinfo").Element("sport").Value;
                     listOfStream.Add(
                         new StreamModel

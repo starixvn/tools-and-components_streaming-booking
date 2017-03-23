@@ -217,17 +217,24 @@ namespace StreamingBooking.Controllers
 
             foreach (var licensee in licensees)
             {
-                var apiSetting = string.Format("{0}?{1}&{2}&{3}&{4}",
-                ConfigurationManager.AppSettings["API.Path"],
-                "pid=" + licensee.PartnerId,
-                "auth=" + licensee.APISecret,
-                "filter=streams",
-                "days=" + ConfigurationManager.AppSettings["API.Days"]);
+                try
+                {
+                    var apiSetting = string.Format("{0}?{1}&{2}&{3}&{4}",
+                           ConfigurationManager.AppSettings["API.Path"],
+                           "pid=" + licensee.PartnerId,
+                           "auth=" + licensee.APISecret,
+                           "filter=streams",
+                           "days=" + ConfigurationManager.AppSettings["API.Days"]);
 
-                XDocument doc = Convert.ToBoolean(ConfigurationManager.AppSettings["IsLocal"]) ? APIService.ReadXmlFile(licensee.PathTest) : APIService.GetXmlResponse(apiSetting);
-                var licenseeStreams = APIService.ProcessEntityElements(licensee.PartnerName, doc);
+                    XDocument doc = Convert.ToBoolean(ConfigurationManager.AppSettings["IsLocal"]) ? APIService.ReadXmlFile(licensee.PathTest) : APIService.GetXmlResponse(apiSetting);
+                    var licenseeStreams = APIService.ProcessEntityElements(licensee.PartnerName, doc);
 
-                streams.AddRange(licenseeStreams);
+                    streams.AddRange(licenseeStreams);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
     }
