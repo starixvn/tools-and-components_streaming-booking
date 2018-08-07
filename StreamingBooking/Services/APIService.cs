@@ -59,6 +59,14 @@ namespace StreamingBooking.Services
             }
         }
 
+        public static string M88
+        {
+            get
+            {
+                return "M88";
+            }
+        }
+
         public static XDocument GetXmlResponse(string requestUrl)
         {
             HttpWebRequest request = WebRequest.Create(requestUrl) as HttpWebRequest;
@@ -111,13 +119,11 @@ namespace StreamingBooking.Services
                             KickOffDate = kickOffDate,
                             LeagueName = leagueName,
                             StreamId = streamId,
-                            SportName = sportName,
-                            Bodog = partnerName == Bodog,
+                            SportName = sportName,                           
                             Dafabet = partnerName == Dafabet,
                             Fun88 = partnerName == Fun88,
                             IBCBet = partnerName == IBCBet,
-                            Macaubet = partnerName == Macaubet,
-                            TLC = partnerName == Tlc88
+                            M88 = partnerName == M88                            
                         });
                 }
                 catch
@@ -174,6 +180,14 @@ namespace StreamingBooking.Services
                 PartnerName = APIService.Tlc88,
                 APISecret = "uG4pxEKM",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.5.xml")
+            });
+
+            licensee.Add(new LicenseeModel
+            {
+                PartnerId = 39,
+                PartnerName = APIService.M88,
+                APISecret = "uCQO84ifdI",
+                PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.6.xml")
             });
 
             return licensee;

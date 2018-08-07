@@ -18,3 +18,8 @@ Thumbs.db
 *.sbr
 obj/
 packages/
+/.vs/StreamingBooking/v15/Server/sqlite3/db.lock
+/.vs/StreamingBooking/v15/Server/sqlite3/storage.ide
+/.vs/StreamingBooking/v15/Server/sqlite3/storage.ide-shm
+/.vs/StreamingBooking/v15/Server/sqlite3/storage.ide-wal
+/.vs/StreamingBooking/DesignTimeBuild/.dtbcache

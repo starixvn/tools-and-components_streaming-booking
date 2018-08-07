@@ -7,6 +7,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -189,6 +190,7 @@
     <Content Include="App_Data\api.event.rev.103.php.3.xml" />
     <Content Include="App_Data\api.event.rev.103.php.4.xml" />
     <Content Include="App_Data\api.event.rev.103.php.5.xml" />
+    <Content Include="App_Data\api.event.rev.103.php.6.xml" />
     <Content Include="Content\DataTables\css\dataTables.autoFill.css" />
     <Content Include="Content\DataTables\css\dataTables.autoFill.min.css" />
     <Content Include="Content\DataTables\css\dataTables.bootstrap.css" />

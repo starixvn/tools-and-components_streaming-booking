@@ -135,12 +135,13 @@ namespace StreamingBooking.Controllers
         {
             var allLicensees = new List<string>();
             var unasLicensees = new List<string> {                  
-                    APIService.Bodog,
+                    //APIService.Bodog,
                     APIService.Dafabet,
-                    APIService.Fun88,
+                    //APIService.Fun88,
                     APIService.IBCBet,
-                    APIService.Macaubet,
-                    APIService.Tlc88                    
+                    APIService.M88
+                    //APIService.Macaubet,
+                    //APIService.Tlc88                    
             };
             var imgLicensees = new List<string> {                  
                     IMGAPIService.Fun88,
