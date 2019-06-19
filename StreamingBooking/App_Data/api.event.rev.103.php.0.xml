@@ -13,7 +13,7 @@
     <sport>Basketball</sport>
     <liga>NBA</liga>
     <competition></competition>
-    <saison>2016/17</saison>
+    <saison>2019/20</saison>
     <pool></pool>
     <round></round>
     <court></court>
@@ -23,7 +23,7 @@
   </sportinfo>
   <schedule>
     <day>Tuesday</day>
-    <date>2017-03-28</date>
+    <date>2019-06-19</date>
     <start>
       <time>01:30</time>
       <offset>na</offset>
