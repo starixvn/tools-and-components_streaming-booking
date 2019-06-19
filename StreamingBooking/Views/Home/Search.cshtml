@@ -13,7 +13,7 @@
     int counter = 0;
     var activeRowClass = string.Empty;
     var oddRowClass = string.Empty;
-
+    
     foreach (var item in Model.DistinctStreams)
     {
         counter++;
@@ -25,6 +25,9 @@
     </td>
     <td>
         @item.KickOffDate.ToString("MM/dd/yyyy")
+    </td>
+    <td>
+        @item.KickOffDate.ToString("HH:mm tt")
     </td>
     <td align="center">
         @item.SportName
@@ -61,7 +64,7 @@
         {
             <span>Booked</span>
         }
-    </td>   
+    </td>
     <td align="center">
         @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.ALog))
         {

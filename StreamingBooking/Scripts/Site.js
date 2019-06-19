@@ -71,7 +71,6 @@
         var licensee = $('#licensees').val();
         var provider = $('#providers').val();
         var sport = $('#sports').val();
-        console.log('sport', sport)
 
         $.ajax({
             url: siteObject.getFullUrl("Home/Search"),
