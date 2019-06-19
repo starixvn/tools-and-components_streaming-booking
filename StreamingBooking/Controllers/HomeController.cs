@@ -27,6 +27,7 @@ namespace StreamingBooking.Controllers
 
             var licensees = GetLicensees();
             var providers = GetProviders();
+            var sports = GetSportNames();
 
             var model = new StreamViewModel
             {
@@ -34,7 +35,8 @@ namespace StreamingBooking.Controllers
                 To = filterDates,
                 Leagues = new List<string>(),
                 Licensees = licensees,
-                Providers = providers
+                Providers = providers,
+                Sports = sports
             };
 
             return View(model);
@@ -46,6 +48,7 @@ namespace StreamingBooking.Controllers
             string toDate,
             string league,
             string licensee,
+            string sport,
             int provider)
         {
             List<StreamModel> allStreams = GetStreamData(provider, licensee);
@@ -54,7 +57,8 @@ namespace StreamingBooking.Controllers
             var matchedStreamData = SessionManager.Streams
                                         .Where(x => x.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
                                             && x.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null)
-                                            && (!string.IsNullOrWhiteSpace(league) ? x.LeagueName == league : x.LeagueName == x.LeagueName))
+                                            && (!string.IsNullOrWhiteSpace(league) ? x.LeagueName == league : x.LeagueName == x.LeagueName)
+                                            && (string.IsNullOrWhiteSpace(sport) || x.SportName == sport))
                                         .ToList();
 
             var model = new StreamViewModel()
@@ -165,6 +169,16 @@ namespace StreamingBooking.Controllers
             allLicensees = allLicensees.Distinct().OrderBy(x => x).ToList();
 
             return allLicensees;
+        }
+
+        private List<string> GetSportNames()
+        {
+            List<StreamModel> allStreams = GetStreamData(0, null);
+
+            return allStreams?
+                .Select(_ => _.SportName)
+                .Distinct()
+                .OrderBy(_ => _).ToList() ?? new List<string>();
         }
 
         private List<StreamModel> GetStreamData(int provider, string filterLicensee)

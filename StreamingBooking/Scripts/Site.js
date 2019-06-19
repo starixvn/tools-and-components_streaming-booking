@@ -42,6 +42,9 @@
 
         $("#licensees").prepend('<option selected value="">---All Licensees---</option>');
 
+        $("#sports").prepend('<option selected value="">---All Sports---</option>');
+
+
         siteObject.search(true);
     };
 
@@ -67,6 +70,8 @@
         var league = $('#leagues').val();
         var licensee = $('#licensees').val();
         var provider = $('#providers').val();
+        var sport = $('#sports').val();
+        console.log('sport', sport)
 
         $.ajax({
             url: siteObject.getFullUrl("Home/Search"),
@@ -75,7 +80,8 @@
                 toDate: toDate,
                 league: league,
                 licensee: licensee,
-                provider: provider
+                provider: provider,
+                sport: sport
             },
             type: 'POST',
             success: function (data) {

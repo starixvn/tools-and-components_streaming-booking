@@ -18,5 +18,7 @@ namespace StreamingBooking.Models
         public IList<string> Licensees { get; set; }
 
         public IList<SelectListItem> Providers { get; set; }
+
+        public IList<string> Sports { get; set; }
     }
 }
