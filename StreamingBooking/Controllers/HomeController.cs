@@ -53,13 +53,18 @@ namespace StreamingBooking.Controllers
         {
             List<StreamModel> allStreams = GetStreamData(provider, licensee);
             SessionManager.Streams = allStreams.Distinct(new StreamingComparer()).ToList();
+            var matchedStreamData = SessionManager.Streams;
 
-            var matchedStreamData = SessionManager.Streams
-                                        .Where(x => x.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
-                                            && x.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null)
-                                            && (!string.IsNullOrWhiteSpace(league) ? x.LeagueName == league : x.LeagueName == x.LeagueName)
-                                            && (string.IsNullOrWhiteSpace(sport) || x.SportName == sport))
-                                        .ToList();
+            if (matchedStreamData.Count > 0)
+            {
+                Predicate<StreamModel> kickOffDateFilter = _ => _.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null) && _.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null);
+                Predicate<StreamModel> leagueFilter = _ => string.IsNullOrWhiteSpace(league) || _.LeagueName == league;
+                Predicate<StreamModel> sportFilter = _ => string.IsNullOrWhiteSpace(sport) || _.SportName == sport;
+
+                matchedStreamData = SessionManager.Streams
+                                            .Where(_ => kickOffDateFilter(_) && leagueFilter(_) && sportFilter(_))
+                                            .ToList();
+            }
 
             var model = new StreamViewModel()
             {
