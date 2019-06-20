@@ -57,7 +57,7 @@ namespace StreamingBooking.Controllers
 
             if (matchedStreamData.Count > 0)
             {
-                Predicate<StreamModel> kickOffDateFilter = _ => _.KickOffDate >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null) && _.KickOffDate <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null);
+                Predicate<StreamModel> kickOffDateFilter = _ => _.KickOffDate.Date >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null) && _.KickOffDate.Date <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null);
                 Predicate<StreamModel> leagueFilter = _ => string.IsNullOrWhiteSpace(league) || _.LeagueName == league;
                 Predicate<StreamModel> sportFilter = _ => string.IsNullOrWhiteSpace(sport) || _.SportName == sport;
 
