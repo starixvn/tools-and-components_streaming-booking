@@ -102,14 +102,17 @@ namespace StreamingBooking.Services
             foreach (XElement el in events)
             {
                 try
-                {
+                {                   
                     eventId = int.Parse(el.Element("eventid").Value);
                     awayName = el.Element("sportinfo").Element("teamA").Value;
                     homeName = el.Element("sportinfo").Element("teamB").Value;
-                    kickOffDate = DateTime.Parse(el.Element("schedule").Element("date").Value);
                     leagueName = el.Element("sportinfo").Element("liga").Value;
                     streamId = el.Element("stream") != null ? int.Parse(el.Element("stream").Element("streamid").Value) : 0;
                     sportName = el.Element("sportinfo").Element("sport").Value;
+                    kickOffDate = DateTime.Parse(el.Element("schedule").Element("date").Value);
+                    var time = el.Element("schedule").Element("start").Element("time").Value.Split(':');
+                    kickOffDate = kickOffDate.Add(new TimeSpan(ushort.Parse(time[0]), ushort.Parse(time[1]), default(ushort)));
+
                     listOfStream.Add(
                         new StreamModel
                         {
