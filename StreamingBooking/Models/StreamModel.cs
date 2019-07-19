@@ -2,6 +2,7 @@
 
 namespace StreamingBooking.Models
 {
+    [Serializable]
     public class StreamModel
     {
         public int StreamId { get; set; }

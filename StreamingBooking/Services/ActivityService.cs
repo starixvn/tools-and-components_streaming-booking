@@ -14,7 +14,7 @@ namespace StreamingBooking.Services
         private readonly string key = ConfigurationManager.AppSettings["ActivityCacheKey"];
         public bool ActiveRow(int streamId)
         {
-            var values = cacheService.Get<IList<StreamModel>>(key) ?? new List<StreamModel>(); ;
+            var values = cacheService.Get<List<StreamModel>>(key).ToList() ?? new List<StreamModel>(); ;
             var updatedItem = values.FirstOrDefault(x => x.StreamId == streamId);
             if (updatedItem != null && updatedItem.IsActive)
             {
@@ -31,7 +31,7 @@ namespace StreamingBooking.Services
 
         public bool UpdateRemark(int streamId, string remark)
         {
-            var values = cacheService.Get<IList<StreamModel>>(key) ?? new List<StreamModel>();
+            var values = cacheService.Get<List<StreamModel>>(key).ToList() ?? new List<StreamModel>();
 
             var updatedItem = values.FirstOrDefault(x => x.StreamId == streamId);
 
@@ -57,9 +57,9 @@ namespace StreamingBooking.Services
 
         }
 
-        public IList<StreamModel> GetActiveStream()
+        public List<StreamModel> GetActiveStream()
         {
-            return cacheService.Get<IList<StreamModel>>(key);
+            return cacheService.Get<List<StreamModel>>(key);
         }
     }
 }

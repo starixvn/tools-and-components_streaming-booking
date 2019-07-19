@@ -11,6 +11,6 @@ namespace StreamingBooking.Services
     {
         bool UpdateRemark(int streamId, string remark);
         bool ActiveRow(int streamId);
-        IList<StreamModel> GetActiveStream();
+        List<StreamModel> GetActiveStream();
     }
 }
