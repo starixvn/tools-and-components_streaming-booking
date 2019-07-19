@@ -1,4 +1,6 @@
-﻿using Fanex.Logging;
+﻿using Fanex.Caching;
+using Fanex.Caching.Redis;
+using Fanex.Logging;
 using Fanex.Logging.RabbitMQ;
 using System;
 using System.Collections.Generic;
@@ -28,6 +30,12 @@ namespace StreamingBooking
                      {
                          new RabbitMQLogging(ConfigurationManager.AppSettings["RabbitMQ-ConnectionString"])
                      });
+            CacheServiceManager.Use(() => new RedisCache(new RedisCacheOptions
+            {
+                ConnectionString = ConfigurationManager.AppSettings["RedisServer"],
+                ApplicationName = ConfigurationManager.AppSettings["RedisAppName"]
+            }));
+
         }
 
         protected void Application_Error(object sender, EventArgs e)
