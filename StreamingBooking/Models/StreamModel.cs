@@ -18,16 +18,18 @@ namespace StreamingBooking.Models
 
         public DateTime KickOffDate { get; set; }
 
-        public bool IBCBet { get; set; }                
+        public bool IBCBet { get; set; }
 
         public bool Dafabet { get; set; }
 
         public bool Fun88 { get; set; }
 
-        public bool M88 { get; set; }        
+        public bool M88 { get; set; }
 
         public bool ALog { get; set; }
 
         public bool Mayfair { get; set; }
+        public string Remark { get; set; }
+        public bool IsActive { get; set; }
     }
 }

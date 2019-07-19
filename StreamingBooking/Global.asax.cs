@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Fanex.Logging;
+using Fanex.Logging.RabbitMQ;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Fanex.Logging;
 
 namespace StreamingBooking
 {
@@ -17,10 +19,15 @@ namespace StreamingBooking
         {
             AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            LogManager
+                    .SetDefaultLogCategory(ConfigurationManager.AppSettings["Fanex.Logging-LogCategory"])
+                    .Use(new List<ILogEngine>
+                     {
+                         new RabbitMQLogging(ConfigurationManager.AppSettings["RabbitMQ-ConnectionString"])
+                     });
         }
 
         protected void Application_Error(object sender, EventArgs e)

@@ -4,8 +4,6 @@
     ViewBag.Title = "Search";
     Layout = null;
 
-    var activeRows = StreamingBooking.Helper.ReadFile(ConfigurationManager.AppSettings["StreamingPath"]);
-    var remarks = StreamingBooking.Helper.ReadRemarkFile(ConfigurationManager.AppSettings["StreamingRemarkPath"]);
 }
 @model StreamingBooking.Models.StreamViewModel
 @if (Model.DistinctStreams.Count != 0)
@@ -13,78 +11,78 @@
     int counter = 0;
     var activeRowClass = string.Empty;
     var oddRowClass = string.Empty;
-    
+
     foreach (var item in Model.DistinctStreams)
     {
         counter++;
-        activeRowClass = activeRows.Contains(item.StreamId.ToString()) ? "active" : string.Empty;
+        activeRowClass = item.IsActive ? "active" : string.Empty;
         oddRowClass = counter % 2 == 0 ? "odd" : string.Empty;
-<tr class="@(oddRowClass) @(activeRowClass)" data-stream-id="@item.StreamId">
-    <td>
-        @item.StreamId
-    </td>
-    <td>
-        @item.KickOffDate.ToString("MM/dd/yyyy")
-    </td>
-    <td>
-        @item.KickOffDate.ToString("HH:mm")
-    </td>
-    <td align="center">
-        @item.SportName
-    </td>
-    <td align="center">
-        @item.LeagueName
-    </td>
-    <td>
-        @item.HomeName
-    </td>
-    <td>
-        @item.AwayName
-    </td>
-    <td align="center">
-        @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.IBCBet))
-        {
-            <span>Booked</span>
-        }
-    </td>
-    <td align="center">
-        @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.Dafabet))
-        {
-            <span>Booked</span>
-        }
-    </td>
-    <td align="center">
-        @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.M88))
-        {
-            <span>Booked</span>
-        }
-    </td>
-    <td align="center">
-        @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.Fun88))
-        {
-            <span>Booked</span>
-        }
-    </td>
-    <td align="center">
-        @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.ALog))
-        {
-            <span>Booked</span>
-        }
-    </td>
-    <td align="center">
-        @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.Mayfair))
-        {
-            <span>Booked</span>
-        }
-    </td>
-    <td>
-        @Html.TextBox("remark", remarks.Keys.Contains(item.StreamId) ? remarks[item.StreamId] : string.Empty)
-    </td>
-</tr>
+        <tr class="@(oddRowClass) @(activeRowClass)" data-stream-id="@item.StreamId">
+            <td>
+                @item.StreamId
+            </td>
+            <td>
+                @item.KickOffDate.ToString("MM/dd/yyyy")
+            </td>
+            <td>
+                @item.KickOffDate.ToString("HH:mm")
+            </td>
+            <td align="center">
+                @item.SportName
+            </td>
+            <td align="center">
+                @item.LeagueName
+            </td>
+            <td>
+                @item.HomeName
+            </td>
+            <td>
+                @item.AwayName
+            </td>
+            <td align="center">
+                @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.IBCBet))
+                {
+                    <span>Booked</span>
+                }
+            </td>
+            <td align="center">
+                @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.Dafabet))
+                {
+                    <span>Booked</span>
+                }
+            </td>
+            <td align="center">
+                @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.M88))
+                {
+                    <span>Booked</span>
+                }
+            </td>
+            <td align="center">
+                @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.Fun88))
+                {
+                    <span>Booked</span>
+                }
+            </td>
+            <td align="center">
+                @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.ALog))
+                {
+                    <span>Booked</span>
+                }
+            </td>
+            <td align="center">
+                @if (Model.AllStreams.Any(x => x.StreamId == item.StreamId && x.Mayfair))
+                {
+                    <span>Booked</span>
+                }
+            </td>
+            <td>
+                @Html.TextBox("remark", item.Remark)
+            </td>
+        </tr>
     }
 }
 else
-{ 
+{
     <tr>
         <td colspan="8">
             No information

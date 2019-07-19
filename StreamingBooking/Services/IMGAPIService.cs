@@ -48,17 +48,17 @@
 
         public static IList<StreamModel> GetStreamEventData(LicenseeModel licensee, string apiUrl)
         {
-            TimeSpan timeSpan = DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1));
-            double timestamp = Math.Round(timeSpan.TotalMilliseconds);
+            var timeSpan = DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1));
+            var timestamp = Math.Round(timeSpan.TotalMilliseconds);
 
-            string apiToken = GenerateAPIToken(licensee.APISecret, timestamp);
+            var apiToken = GenerateAPIToken(licensee.APISecret, timestamp);
             apiUrl = string.Format("{0}?operatorId={1}&auth={2}&timestamp={3}", apiUrl, licensee.PartnerId, apiToken, timestamp);
 
             using (HttpClient client = new HttpClient())
             {
                 var result = client.GetAsync(apiUrl).Result.Content.ReadAsStringAsync().Result;
 
-                List<EventModel> events = JsonConvert.DeserializeObject<List<EventModel>>(result);
+                var events = JsonConvert.DeserializeObject<List<EventModel>>(result);
 
                 IList<StreamModel> streams = events.Select(x =>
                 {
@@ -88,7 +88,7 @@
         private static MatchModel GetMatchInfo(string eventTitle)
         {
             var match = new MatchModel();
-            string separateString = " v ";
+            var separateString = " v ";
 
             if (eventTitle.Contains(separateString))
             {
@@ -106,12 +106,12 @@
 
         private static string GenerateAPIToken(string secret, double timestamp)
         {
-            string keyString = string.Format("{0}:{1}", secret, timestamp);
+            var keyString = string.Format("{0}:{1}", secret, timestamp);
 
-            HMAC hmac = HMACMD5.Create(ALG);
+            var hmac = HMACMD5.Create(ALG);
             hmac.Key = Encoding.UTF8.GetBytes(secret);
             hmac.ComputeHash(Encoding.UTF8.GetBytes(keyString));
-            string token = BitConverter.ToString(hmac.Hash).Replace("-", "");
+            var token = BitConverter.ToString(hmac.Hash).Replace("-", "");
 
             return token.ToLower();
         }

@@ -1,17 +1,20 @@
-﻿using System;
+﻿using StreamingBooking.Common;
+using StreamingBooking.Models;
+using StreamingBooking.Services;
+
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using System.Xml.Linq;
-using StreamingBooking.Common;
-using StreamingBooking.Models;
-using StreamingBooking.Services;
 
 namespace StreamingBooking.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IDataService dataService = new DataService();
+        private readonly IActivityService activityService = new ActivityService();
         public ActionResult Index()
         {
             var days = Convert.ToInt32(ConfigurationManager.AppSettings["API.Days"]);
@@ -51,46 +54,69 @@ namespace StreamingBooking.Controllers
             string sport,
             int provider)
         {
-            List<StreamModel> allStreams = GetStreamData(provider, licensee);
-            SessionManager.Streams = allStreams.Distinct(new StreamingComparer()).ToList();
-            var matchedStreamData = SessionManager.Streams;
+            var allStreams = dataService.Get(new StreamMetalModel { Licensee = licensee, Provider = provider });
 
-            if (matchedStreamData.Count > 0)
+            var model = new StreamViewModel
             {
-                Predicate<StreamModel> kickOffDateFilter = _ => _.KickOffDate.Date >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null) && _.KickOffDate.Date <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null);
+                AllStreams = allStreams
+            };
+
+            if (allStreams.Count > 0)
+            {
+                Predicate<StreamModel> kickOffDateFilter = _ => _.KickOffDate.Date >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
+                && _.KickOffDate.Date <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null);
                 Predicate<StreamModel> leagueFilter = _ => string.IsNullOrWhiteSpace(league) || _.LeagueName == league;
                 Predicate<StreamModel> sportFilter = _ => string.IsNullOrWhiteSpace(sport) || _.SportName == sport;
 
-                matchedStreamData = SessionManager.Streams
+                model.DistinctStreams = allStreams
                                             .Where(_ => kickOffDateFilter(_) && leagueFilter(_) && sportFilter(_))
                                             .ToList();
             }
 
-            var model = new StreamViewModel()
+            var activeStreams = activityService.GetActiveStream();
+            if (activeStreams != null && activeStreams.Any())
             {
-                DistinctStreams = matchedStreamData,
-                AllStreams = allStreams
-            };
+                model.DistinctStreams = (from s in model.DistinctStreams
+                                         join a in activeStreams
+                                    on s.StreamId equals a.StreamId
+                                    into r
+                                         from ax in r.DefaultIfEmpty(new StreamModel())
+                                         select new StreamModel
+                                         {
+                                             ALog = s.ALog,
+                                             AwayName = s.AwayName,
+                                             Dafabet = s.Dafabet,
+                                             EventId = s.EventId,
+                                             StreamId = s.StreamId,
+                                             SportName = s.SportName,
+                                             Fun88 = s.Fun88,
+                                             HomeName = s.HomeName,
+                                             IBCBet = s.IBCBet,
+                                             IsActive = ax.IsActive,
+                                             KickOffDate = s.KickOffDate,
+                                             LeagueName = s.LeagueName,
+                                             M88 = s.M88,
+                                             Mayfair = s.Mayfair,
+                                             Remark = ax.Remark
 
+                                         }).ToList();
+
+            }
             return View(model);
         }
 
         [HttpGet]
         public JsonResult GetLeagues(int provider, string licensee, string fromDate, string toDate)
         {
-            if (SessionManager.Streams == null)
-            {
-                SessionManager.Streams = GetStreamData(provider, licensee);
-            }
 
-            List<StreamModel> matchedStreamData = SessionManager.Streams;
+            var matchedStreamData = dataService.Get(new StreamMetalModel { Provider = provider, Licensee = licensee });
 
             if (!string.IsNullOrWhiteSpace(fromDate) && !string.IsNullOrWhiteSpace(toDate))
             {
                 var filterFromDate = Convert.ToDateTime(fromDate);
                 var filterToDate = Convert.ToDateTime(toDate);
 
-                matchedStreamData = SessionManager.Streams
+                matchedStreamData = matchedStreamData
                                            .Where(x => x.KickOffDate >= filterFromDate && x.KickOffDate <= filterToDate)
                                            .ToList();
             }
@@ -103,7 +129,7 @@ namespace StreamingBooking.Controllers
         [HttpGet]
         public ActionResult GetLicenseesByProvider(int provider)
         {
-            List<string> licensees = GetLicensees(provider);
+            var licensees = GetLicensees(provider);
 
             return Json(licensees, JsonRequestBehavior.AllowGet);
         }
@@ -111,20 +137,22 @@ namespace StreamingBooking.Controllers
         [HttpPost]
         public void UpdateActiveRow(int streamId)
         {
-            var filePath = ConfigurationManager.AppSettings["StreamingPath"];
-
-            Helper.WriteFile(filePath, streamId);
+            if (streamId > 0)
+            {
+                activityService.ActiveRow(streamId);
+            }
         }
 
         [HttpPost]
         public void UpdateRemark(int streamId, string remark)
         {
-            var filePath = ConfigurationManager.AppSettings["StreamingRemarkPath"];
-
-            Helper.WriteRemarkFile(filePath, streamId, remark);
+            if (streamId > 0)
+            {
+                activityService.UpdateRemark(streamId, HttpUtility.HtmlEncode(remark));
+            }
         }
 
-        private List<SelectListItem> GetProviders()
+        private static List<SelectListItem> GetProviders()
         {
             var providers = new List<SelectListItem>();
 
@@ -140,7 +168,7 @@ namespace StreamingBooking.Controllers
             return providers;
         }
 
-        private List<string> GetLicensees(int provider = 0)
+        private static List<string> GetLicensees(int provider = 0)
         {
             var allLicensees = new List<string>();
             var unasLicensees = new List<string> {                  
@@ -152,7 +180,7 @@ namespace StreamingBooking.Controllers
                     //APIService.Macaubet,
                     //APIService.Tlc88                    
             };
-            var imgLicensees = new List<string> {                  
+            var imgLicensees = new List<string> {
                     IMGAPIService.Fun88,
                     IMGAPIService.ALog,
                     IMGAPIService.Mayfair
@@ -178,7 +206,7 @@ namespace StreamingBooking.Controllers
 
         private List<string> GetSportNames()
         {
-            List<StreamModel> allStreams = GetStreamData(0, null);
+            var allStreams = dataService.Get(new StreamMetalModel());
 
             return allStreams?
                 .Select(_ => _.SportName)
@@ -186,76 +214,6 @@ namespace StreamingBooking.Controllers
                 .OrderBy(_ => _).ToList() ?? new List<string>();
         }
 
-        private List<StreamModel> GetStreamData(int provider, string filterLicensee)
-        {
-            var streams = new List<StreamModel>();
-
-            switch (provider)
-            {
-                case (int)ProviderType.IMG:
-                    GetStreamEventDataFromIMGApi(filterLicensee, streams);
-                    break;
-                case (int)ProviderType.Unas:
-                    GetStreamEventDataFromUNASApi(filterLicensee, streams);
-                    break;
-                default:
-                    GetStreamEventDataFromUNASApi(filterLicensee, streams);
-
-                    GetStreamEventDataFromIMGApi(filterLicensee, streams);
-                    break;
-            }
-
-            return streams;
-        }
-
-        private void GetStreamEventDataFromIMGApi(string filterLicensee, List<StreamModel> streams)
-        {
-            string imgApiUrl = ConfigurationManager.AppSettings["IMG.API.Path"];
-            var licensees = IMGAPIService.Licensees();
-
-            if (!string.IsNullOrWhiteSpace(filterLicensee))
-            {
-                licensees = licensees.Where(x => x.PartnerName.Equals(filterLicensee, StringComparison.OrdinalIgnoreCase)).ToList();
-            }
-
-            foreach (var licensee in licensees)
-            {
-                IList<StreamModel> events = IMGAPIService.GetStreamEventData(licensee, imgApiUrl);
-
-                streams.AddRange(events);
-            }
-        }
-
-        private static void GetStreamEventDataFromUNASApi(string filterLicensee, List<StreamModel> streams)
-        {
-            var licensees = APIService.Licensees();
-
-            if (!string.IsNullOrWhiteSpace(filterLicensee))
-            {
-                licensees = licensees.Where(x => x.PartnerName.Equals(filterLicensee, StringComparison.OrdinalIgnoreCase)).ToList();
-            }
-
-            foreach (var licensee in licensees)
-            {
-                try
-                {
-                    var apiSetting = string.Format("{0}?{1}&{2}&{3}&{4}",
-                           ConfigurationManager.AppSettings["API.Path"],
-                           "pid=" + licensee.PartnerId,
-                           "auth=" + licensee.APISecret,
-                           "filter=streams",
-                           "days=" + ConfigurationManager.AppSettings["API.Days"]);
-
-                    XDocument doc = Convert.ToBoolean(ConfigurationManager.AppSettings["IsLocal"]) ? APIService.ReadXmlFile(licensee.PathTest) : APIService.GetXmlResponse(apiSetting);
-                    var licenseeStreams = APIService.ProcessEntityElements(licensee.PartnerName, doc);
-
-                    streams.AddRange(licenseeStreams);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-        }
     }
+
 }

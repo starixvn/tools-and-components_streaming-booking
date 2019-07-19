@@ -172,7 +172,7 @@
 
     siteObject.Remark = function () {
         $("[name=remark]").on('keypress', function (e) {
-            if (e.keyCode == 13) {
+            if (e.keyCode === 13) {
                 var $this = $(this);
                 var streamId = $this.parents("tr").attr("data-stream-id");
                 var remark = $this.val();
