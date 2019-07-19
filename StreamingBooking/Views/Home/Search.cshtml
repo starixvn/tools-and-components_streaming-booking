@@ -6,7 +6,7 @@
 
 }
 @model StreamingBooking.Models.StreamViewModel
-@if (Model.DistinctStreams.Count != 0)
+@if (Model.DistinctStreams != null && Model.DistinctStreams.Any())
 {
     int counter = 0;
     var activeRowClass = string.Empty;
