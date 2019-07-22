@@ -61,7 +61,7 @@ namespace StreamingBooking.Services
                     dataFromCache.AddRange(IMGAPIService.GetStreamEventData(licensee, imgApiUrl));
                 }
 
-                cacheService.Set(cacheKey, dataFromCache, new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(20)));
+                cacheService.Set(cacheKey, dataFromCache, new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
             }
 
             streams.AddRange(dataFromCache);
@@ -104,7 +104,7 @@ namespace StreamingBooking.Services
                     }
                 }
 
-                cacheService.Set(cacheKey, dataFromCache, new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(20)));
+                cacheService.Set(cacheKey, dataFromCache, new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
 
             }
             streams.AddRange(dataFromCache);

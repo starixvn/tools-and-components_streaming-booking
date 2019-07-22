@@ -25,7 +25,7 @@ namespace StreamingBooking.Services
                 values.Add(new StreamModel { StreamId = streamId, IsActive = true });
             }
 
-            cacheService.Set(key, values, new CacheItemOptions().SetSlidingExpiration(TimeSpan.FromSeconds(20)));
+            cacheService.Set(key, values, new CacheItemOptions().SetSlidingExpiration(TimeSpan.FromMinutes(20)));
             return true;
         }
 
@@ -51,7 +51,7 @@ namespace StreamingBooking.Services
                 values.Add(new StreamModel { StreamId = streamId, Remark = remark });
             }
 
-            cacheService.Set(key, values, new CacheItemOptions().SetSlidingExpiration(TimeSpan.FromSeconds(20)));
+            cacheService.Set(key, values, new CacheItemOptions().SetSlidingExpiration(TimeSpan.FromMinutes(20)));
 
             return true;
 
