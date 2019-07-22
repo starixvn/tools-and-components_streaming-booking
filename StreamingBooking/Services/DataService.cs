@@ -17,7 +17,7 @@ namespace StreamingBooking.Services
 
         public List<StreamModel> Get(StreamMetalModel filter)
         {
-            return GetStreamData(filter.Provider, filter.Licensee).Distinct(new StreamingComparer()).ToList(); ;
+            return GetStreamData(filter.Provider, filter.Licensee).Distinct(new StreamingComparer()).ToList();
         }
         private List<StreamModel> GetStreamData(int provider, string filterLicensee)
         {
@@ -61,7 +61,7 @@ namespace StreamingBooking.Services
                     dataFromCache.AddRange(IMGAPIService.GetStreamEventData(licensee, imgApiUrl));
                 }
 
-                cacheService.Set(cacheKey, dataFromCache, new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                cacheService.Set(cacheKey, dataFromCache, new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(20)));
             }
 
             streams.AddRange(dataFromCache);
@@ -104,7 +104,7 @@ namespace StreamingBooking.Services
                     }
                 }
 
-                cacheService.Set(cacheKey, dataFromCache, new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                cacheService.Set(cacheKey, dataFromCache, new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(20)));
 
             }
             streams.AddRange(dataFromCache);
