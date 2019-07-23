@@ -45,7 +45,11 @@ namespace StreamingBooking.Services
         {
             var cacheKey = $"{key}_IMGApi_{filterLicensee}";
 
-            var dataFromCache = cacheService.Get<List<StreamModel>>(cacheKey) ?? new List<StreamModel>();
+            cacheService.TryGet(cacheKey, out List<StreamModel> dataFromCache);
+            if (dataFromCache == null)
+            {
+                dataFromCache = new List<StreamModel>();
+            }
             if (!dataFromCache.Any())
             {
                 var imgApiUrl = ConfigurationManager.AppSettings["IMG.API.Path"];
@@ -71,8 +75,11 @@ namespace StreamingBooking.Services
         {
             var cacheKey = $"{key}_UNASApi_{filterLicensee}";
 
-            var dataFromCache = cacheService.Get<List<StreamModel>>(cacheKey) ?? new List<StreamModel>();
-
+            cacheService.TryGet(cacheKey, out List<StreamModel> dataFromCache);
+            if (dataFromCache == null)
+            {
+                dataFromCache = new List<StreamModel>();
+            }
             if (!dataFromCache.Any())
             {
                 var licensees = APIService.Licensees();
