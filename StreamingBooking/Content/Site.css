@@ -57,7 +57,7 @@ table.tbl-data tbody tr.active
     float: left;
     display: block;
     min-width: 1024px;
-    width: 100%;
+    width: 100% !important;
     border: 1px solid #BDBDBD;
     margin-top: 10px;
     overflow-x: auto;
