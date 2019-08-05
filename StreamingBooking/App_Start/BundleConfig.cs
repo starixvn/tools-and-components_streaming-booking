@@ -28,11 +28,10 @@ namespace StreamingBooking
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
                         "~/Scripts/Site.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/DataTables/css/jquery.dataTables.css", "~/Content/site.css"));
-
-            bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
-                                            "~/Content/bootstrap/core.css",
-                                            "~/Content/bootstrap/multi-select.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/DataTables/css/jquery.dataTables.css",
+                                                    "~/Content/site.css",
+                                                    "~/Content/bootstrap/core.css",
+                                                    "~/Content/bootstrap/multi-select.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
