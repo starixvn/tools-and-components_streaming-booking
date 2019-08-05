@@ -21,6 +21,7 @@
     });
 
 
+
     var baseUrl = Url.Content("~/");
 }
 @model StreamingBooking.Models.StreamViewModel
@@ -74,7 +75,7 @@
             </td>
             <td class="text">
                 @Html.ListBox("sports", new MultiSelectList(Model.Sports), new { multiple = "multiple" })
-            </td>>
+            </td>
             <td class="lable">
                 Auto Refresh
             </td>

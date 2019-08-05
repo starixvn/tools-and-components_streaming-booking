@@ -1,9 +1,9 @@
-﻿body
-{
+﻿body {
     font-size: .85em;
-    font-family: "Segoe UI" , Verdana, Helvetica, Sans-Serif;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
     background-color: #fff;
+    margin: 15px 15px !important;
 }
 
 header, footer, nav, section
@@ -65,6 +65,7 @@ table.tbl-data tbody tr.active
 .filter
 {
     float: left;
+    padding: 10px 0;
     display: block;
     min-width: 1024px;
     width: 100%;
