@@ -21,7 +21,6 @@
     });
 
 
-
     var baseUrl = Url.Content("~/");
 }
 @model StreamingBooking.Models.StreamViewModel
@@ -70,12 +69,12 @@
             <td class="text">
                 @Html.DropDownList("toDate", new SelectList(Model.To))
             </td>
-            <td class="label">
+            <td class="lable">
                 Sports
             </td>
             <td class="text">
-                @Html.DropDownList("sports", new SelectList(Model.Sports))
-            </td>
+                @Html.ListBox("sports", new MultiSelectList(Model.Sports), new { multiple = "multiple" })
+            </td>>
             <td class="lable">
                 Auto Refresh
             </td>
@@ -136,7 +135,6 @@
                 </th>
             </tr>
         </thead>
-        <tbody id="data-contain">
-        </tbody>
+        <tbody id="data-contain"></tbody>
     </table>
 </div>

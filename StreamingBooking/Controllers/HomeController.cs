@@ -51,7 +51,7 @@ namespace StreamingBooking.Controllers
             string toDate,
             string league,
             string licensee,
-            string sport,
+            string sports,
             int provider)
         {
             var allStreams = dataService.Get(new StreamMetalModel { Licensee = licensee, Provider = provider });
@@ -66,7 +66,7 @@ namespace StreamingBooking.Controllers
                 Predicate<StreamModel> kickOffDateFilter = _ => _.KickOffDate.Date >= DateTime.ParseExact(fromDate, "MM/dd/yyyy", null)
                 && _.KickOffDate.Date <= DateTime.ParseExact(toDate, "MM/dd/yyyy", null);
                 Predicate<StreamModel> leagueFilter = _ => string.IsNullOrWhiteSpace(league) || _.LeagueName == league;
-                Predicate<StreamModel> sportFilter = _ => string.IsNullOrWhiteSpace(sport) || _.SportName == sport;
+                Predicate<StreamModel> sportFilter = _ => string.IsNullOrWhiteSpace(sports) || sports.Split(',').Any(s => s == _.SportName);
 
                 model.DistinctStreams = allStreams
                                             .Where(_ => kickOffDateFilter(_) && leagueFilter(_) && sportFilter(_))

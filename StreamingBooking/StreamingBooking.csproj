@@ -220,6 +220,8 @@
     <Content Include="App_Data\api.event.rev.103.php.4.xml" />
     <Content Include="App_Data\api.event.rev.103.php.5.xml" />
     <Content Include="App_Data\api.event.rev.103.php.6.xml" />
+    <Content Include="Content\bootstrap\core.css" />
+    <Content Include="Content\bootstrap\multi-select.css" />
     <Content Include="Content\DataTables\css\dataTables.autoFill.css" />
     <Content Include="Content\DataTables\css\dataTables.autoFill.min.css" />
     <Content Include="Content\DataTables\css\dataTables.bootstrap.css" />
@@ -345,6 +347,8 @@
     <Content Include="images\sort_both.png" />
     <Content Include="images\sort_desc.png" />
     <Content Include="images\sort_desc_disabled.png" />
+    <Content Include="Scripts\bootstrap\core.js" />
+    <Content Include="Scripts\bootstrap\multi-select.js" />
     <Content Include="Scripts\DataTables\dataTables.autoFill.js" />
     <Content Include="Scripts\DataTables\dataTables.autoFill.min.js" />
     <Content Include="Scripts\DataTables\dataTables.bootstrap.js" />
@@ -463,8 +467,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51303</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl></IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

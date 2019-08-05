@@ -42,8 +42,9 @@
 
         $("#licensees").prepend('<option selected value="">---All Licensees---</option>');
 
-        $("#sports").prepend('<option selected value="">---All Sports---</option>');
-
+        $('#sports').multiselect({
+            includeSelectAllOption: true
+        });
 
         siteObject.search(true);
     };
@@ -70,7 +71,7 @@
         var league = $('#leagues').val();
         var licensee = $('#licensees').val();
         var provider = $('#providers').val();
-        var sport = $('#sports').val();
+        var sports = siteObject.getSportsSelected();
 
         $.ajax({
             url: siteObject.getFullUrl("Home/Search"),
@@ -80,7 +81,7 @@
                 league: league,
                 licensee: licensee,
                 provider: provider,
-                sport: sport
+                sports: sports
             },
             type: 'POST',
             success: function (data) {
@@ -187,6 +188,16 @@
                 });
             }
         });
+    };
+
+    siteObject.getSportsSelected = function () {
+        var sportsSelected = $("#sports option:selected");
+        var sports = [];
+        sportsSelected.each(function () {
+            sports.push($(this).val());
+        });
+
+        return sports.join(',');
     };
 
     return siteObject;

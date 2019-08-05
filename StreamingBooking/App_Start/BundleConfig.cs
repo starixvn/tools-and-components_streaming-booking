@@ -18,6 +18,10 @@ namespace StreamingBooking
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                        "~/Scripts/bootstrap/core.js",
+                        "~/Scripts/bootstrap/multi-select.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/datatable").Include(
                         "~/Scripts/DataTables/jquery.dataTables.js", "~/Scripts/jquery.cookie.js"));
 
@@ -26,6 +30,9 @@ namespace StreamingBooking
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/DataTables/css/jquery.dataTables.css", "~/Content/site.css"));
 
+            bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
+                                            "~/Content/bootstrap/core.css",
+                                            "~/Content/bootstrap/multi-select.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
