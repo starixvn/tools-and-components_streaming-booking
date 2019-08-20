@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web.Hosting;
 using System.Xml.Linq;
 using Fanex.Logging;
@@ -70,17 +72,24 @@ namespace StreamingBooking.Services
         public static XDocument GetXmlResponse(string requestUrl)
         {
             HttpWebRequest request = WebRequest.Create(requestUrl) as HttpWebRequest;
-            HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+            XDocument xmlDoc = null;
 
-            XDocument xmlDoc = XDocument.Load(response.GetResponseStream());
+            using (var response = request.GetResponse() as HttpWebResponse)
+            {
+                using (var stream = response.GetResponseStream())
+                {
+                    StreamReader resStream = new StreamReader(stream, Encoding.UTF8);
+                    var xmlText = resStream.ReadToEnd();
+                    xmlDoc = XDocument.Parse(xmlText);
+                }
+            }
 
-            return (xmlDoc);
+            return xmlDoc;
         }
 
         public static XDocument ReadXmlFile(string filePath)
         {
             XDocument doc = XDocument.Load(filePath);
-
             return doc;
         }
 
