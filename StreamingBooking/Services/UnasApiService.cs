@@ -11,7 +11,7 @@ using StreamingBooking.Models;
 
 namespace StreamingBooking.Services
 {
-    public static class APIService
+    public static class UnasApiService
     {
         public static string IBCBet
         {
@@ -154,42 +154,42 @@ namespace StreamingBooking.Services
             licensee.Add(new LicenseeModel
             {
                 PartnerId = 31,
-                PartnerName = APIService.IBCBet,
+                PartnerName = UnasApiService.IBCBet,
                 APISecret = "ET31DPYd",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.0.xml")
             });
             licensee.Add(new LicenseeModel
             {
                 PartnerId = 47,
-                PartnerName = APIService.Bodog,
+                PartnerName = UnasApiService.Bodog,
                 APISecret = "BYE1QRgW",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.1.xml")
             });
             licensee.Add(new LicenseeModel
             {
                 PartnerId = 42,
-                PartnerName = APIService.Dafabet,
+                PartnerName = UnasApiService.Dafabet,
                 APISecret = "k2vSVp6W",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.2.xml")
             });
             licensee.Add(new LicenseeModel
             {
                 PartnerId = 45,
-                PartnerName = APIService.Fun88,
+                PartnerName = UnasApiService.Fun88,
                 APISecret = "ENCmG6t1",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.3.xml")
             });
             licensee.Add(new LicenseeModel
             {
                 PartnerId = 38,
-                PartnerName = APIService.Macaubet,
+                PartnerName = UnasApiService.Macaubet,
                 APISecret = "UxcjUrMw",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.4.xml")
             });
             licensee.Add(new LicenseeModel
             {
                 PartnerId = 51,
-                PartnerName = APIService.Tlc88,
+                PartnerName = UnasApiService.Tlc88,
                 APISecret = "uG4pxEKM",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.5.xml")
             });
@@ -197,7 +197,7 @@ namespace StreamingBooking.Services
             licensee.Add(new LicenseeModel
             {
                 PartnerId = 39,
-                PartnerName = APIService.M88,
+                PartnerName = UnasApiService.M88,
                 APISecret = "uCQO84ifdI",
                 PathTest = HostingEnvironment.MapPath("~/App_Data/api.event.rev.103.php.6.xml")
             });

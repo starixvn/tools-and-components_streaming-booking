@@ -15,6 +15,7 @@ namespace StreamingBooking.Controllers
     {
         private readonly IDataService dataService = new DataService();
         private readonly IActivityService activityService = new ActivityService();
+
         public ActionResult Index()
         {
             var days = Convert.ToInt32(ConfigurationManager.AppSettings["API.Days"]);
@@ -54,7 +55,13 @@ namespace StreamingBooking.Controllers
             string sports,
             int provider)
         {
-            var allStreams = dataService.Get(new StreamMetalModel { Licensee = licensee, Provider = provider });
+            var allStreams = dataService.Get(new StreamMetalModel
+            {
+                Licensee = licensee,
+                Provider = provider,
+                From = fromDate,
+                To = toDate
+            });
 
             var model = new StreamViewModel
             {
@@ -98,9 +105,7 @@ namespace StreamingBooking.Controllers
                                              M88 = s.M88,
                                              Mayfair = s.Mayfair,
                                              Remark = ax.Remark
-
                                          }).ToList();
-
             }
             return View(model);
         }
@@ -108,7 +113,6 @@ namespace StreamingBooking.Controllers
         [HttpGet]
         public JsonResult GetLeagues(int provider, string licensee, string fromDate, string toDate)
         {
-
             var matchedStreamData = dataService.Get(new StreamMetalModel { Provider = provider, Licensee = licensee });
 
             if (!string.IsNullOrWhiteSpace(fromDate) && !string.IsNullOrWhiteSpace(toDate))
@@ -171,19 +175,19 @@ namespace StreamingBooking.Controllers
         private static List<string> GetLicensees(int provider = 0)
         {
             var allLicensees = new List<string>();
-            var unasLicensees = new List<string> {                  
+            var unasLicensees = new List<string> {
                     //APIService.Bodog,
-                    APIService.Dafabet,
+                    UnasApiService.Dafabet,
                     //APIService.Fun88,
-                    APIService.IBCBet,
-                    APIService.M88
+                    UnasApiService.IBCBet,
+                    UnasApiService.M88
                     //APIService.Macaubet,
-                    //APIService.Tlc88                    
+                    //APIService.Tlc88
             };
             var imgLicensees = new List<string> {
-                    IMGAPIService.Fun88,
-                    IMGAPIService.ALog,
-                    IMGAPIService.Mayfair
+                    ImgApiService.Fun88,
+                    ImgApiService.ALog,
+                    ImgApiService.Mayfair
             };
 
             switch (provider)
@@ -191,9 +195,11 @@ namespace StreamingBooking.Controllers
                 case (int)ProviderType.IMG:
                     allLicensees = imgLicensees;
                     break;
+
                 case (int)ProviderType.Unas:
                     allLicensees = unasLicensees;
                     break;
+
                 default:
                     allLicensees = unasLicensees.Union(imgLicensees).ToList();
                     break;
@@ -213,7 +219,5 @@ namespace StreamingBooking.Controllers
                 .Distinct()
                 .OrderBy(_ => _).ToList() ?? new List<string>();
         }
-
     }
-
 }

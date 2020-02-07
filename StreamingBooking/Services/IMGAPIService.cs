@@ -1,16 +1,16 @@
 ﻿namespace StreamingBooking.Services
 {
+    using Newtonsoft.Json;
+    using StreamingBooking.Models;
+    using StreamingBooking.Models.IMG;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Net.Http;
     using System.Security.Cryptography;
     using System.Text;
-    using Newtonsoft.Json;
-    using StreamingBooking.Models;
-    using StreamingBooking.Models.IMG;
 
-    public static class IMGAPIService
+    public static class ImgApiService
     {
         private const string ALG = "HmacMD5";
 

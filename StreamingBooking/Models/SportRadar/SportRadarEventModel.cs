@@ -1,0 +1,37 @@
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace StreamingBooking.Models
+{
+    public class SportsRadarEventModel : BaseEventModel
+    {
+        [JsonProperty("id")]
+        public string EventId { get; set; }
+
+        [JsonProperty("start_time")]
+        public DateTime StartTime { get; set; }
+
+        [JsonProperty("first_level_category")]
+        public CategoryModel Sport { get; set; }
+
+        [JsonProperty("third_level_category")]
+        public CategoryModel Tournament { get; set; }
+
+        [JsonProperty("competitors")]
+        public IList<CompetitorModel> Competitors { get; set; }
+
+        public override int Id { get => int.Parse(EventId.Split(':')[2]); }
+
+        public override DateTime KickOffDate { get => StartTime; }
+
+        public override string SportName { get => Sport.Name; }
+
+        public override string LeagueName { get => Tournament.Name; }
+
+        public override string HomeName { get => Competitors?.ElementAtOrDefault(0).Name; }
+
+        public override string AwayName { get => Competitors?.ElementAtOrDefault(1).Name; }
+    }
+}
