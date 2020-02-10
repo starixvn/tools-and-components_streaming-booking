@@ -15,15 +15,12 @@ namespace StreamingBooking.Services
 
         public List<StreamModel> Get(StreamMetalModel filter)
         {
-            DateTime? from = string.IsNullOrEmpty(filter.From) ? null as DateTime? : DateTime.ParseExact(filter.From, "MM/dd/yyyy", null);
-            DateTime? to = string.IsNullOrEmpty(filter.To) ? null as DateTime? : DateTime.ParseExact(filter.To, "MM/dd/yyyy", null);
-
-            return GetStreamData(filter.Provider, filter.Licensee, from, to)
+            return GetStreamData(filter.Provider, filter.Licensee)
                 .Distinct(new StreamingComparer())
                 .ToList();
         }
 
-        private List<StreamModel> GetStreamData(int provider, string filterLicensee, DateTime? from, DateTime? to)
+        private List<StreamModel> GetStreamData(int provider, string filterLicensee)
         {
             var streams = new List<StreamModel>();
 
@@ -38,20 +35,20 @@ namespace StreamingBooking.Services
                     break;
 
                 case (int)ProviderType.SportRadar:
-                    GetStreamEventDataFromSportRadarApi(filterLicensee, from, to, streams);
+                    GetStreamEventDataFromSportRadarApi(filterLicensee, streams);
                     break;
 
                 default:
                     GetStreamEventDataFromUNASApi(filterLicensee, streams);
                     GetStreamEventDataFromIMGApi(filterLicensee, streams);
-                    GetStreamEventDataFromSportRadarApi(filterLicensee, from, to, streams);
+                    GetStreamEventDataFromSportRadarApi(filterLicensee, streams);
                     break;
             }
 
             return streams;
         }
 
-        private void GetStreamEventDataFromSportRadarApi(string filterLicensee, DateTime? from, DateTime? to, List<StreamModel> streams)
+        private void GetStreamEventDataFromSportRadarApi(string filterLicensee, List<StreamModel> streams)
         {
             var cacheKey = $"{key}_SportRadarApi_{filterLicensee}";
             cacheService.TryGet(cacheKey, out List<StreamModel> dataFromCache);
@@ -68,7 +65,7 @@ namespace StreamingBooking.Services
                     licensees = licensees.Where(x => x.PartnerName.Equals(filterLicensee, StringComparison.OrdinalIgnoreCase)).ToList();
                 }
 
-                dataFromCache.AddRange(sportRadarService.GetStreamEventData(from, to, licensees.ToArray()));
+                dataFromCache.AddRange(sportRadarService.GetStreamEventData(licensees.ToArray()));
 
                 cacheService.Set(cacheKey, dataFromCache, new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
             }
@@ -79,7 +76,6 @@ namespace StreamingBooking.Services
         private void GetStreamEventDataFromIMGApi(string filterLicensee, List<StreamModel> streams)
         {
             var cacheKey = $"{key}_IMGApi_{filterLicensee}";
-
             cacheService.TryGet(cacheKey, out List<StreamModel> dataFromCache);
             if (dataFromCache == null)
             {
@@ -109,7 +105,6 @@ namespace StreamingBooking.Services
         private void GetStreamEventDataFromUNASApi(string filterLicensee, List<StreamModel> streams)
         {
             var cacheKey = $"{key}_UNASApi_{filterLicensee}";
-
             cacheService.TryGet(cacheKey, out List<StreamModel> dataFromCache);
             if (dataFromCache == null)
             {

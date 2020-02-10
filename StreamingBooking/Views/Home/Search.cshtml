@@ -11,6 +11,7 @@
     int counter = 0;
     var activeRowClass = string.Empty;
     var oddRowClass = string.Empty;
+    var clientTimeZone = Convert.ToInt32(ConfigurationManager.AppSettings["ClientTimeZone"]);
 
     foreach (var item in Model.DistinctStreams)
     {
@@ -22,10 +23,10 @@
                 @item.StreamId
             </td>
             <td>
-                @item.KickOffDate.ToString("MM/dd/yyyy")
+                @item.KickOffDate.ToString("MM/dd/yyyy") 
             </td>
             <td>
-                @item.KickOffDate.ToString("HH:mm")
+                @item.KickOffDate.ToString("HH:mm") GMT+@clientTimeZone
             </td>
             <td align="center">
                 @item.SportName

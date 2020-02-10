@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using StreamingBooking.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace StreamingBooking.Models
 
         public override int Id { get => int.Parse(EventId.Split(':')[2]); }
 
-        public override DateTime KickOffDate { get => StartTime; }
+        public override DateTime KickOffDate { get => StartTime.ToClientTime(); }
 
         public override string SportName { get => Sport.Name; }
 

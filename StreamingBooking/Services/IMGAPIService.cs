@@ -1,6 +1,7 @@
 ﻿namespace StreamingBooking.Services
 {
     using Newtonsoft.Json;
+    using StreamingBooking.Helpers;
     using StreamingBooking.Models;
     using StreamingBooking.Models.IMG;
     using System;
@@ -72,7 +73,7 @@
                         AwayName = match.AwayTeam,
                         EventId = x.Id,
                         HomeName = match.HomeTeam,
-                        KickOffDate = x.StartDate,
+                        KickOffDate = x.StartDate.ToClientTime(),
                         LeagueName = x.Tournament.Name,
                         SportName = x.Tournament.Property.Sport.Name,
                         StreamId = x.Id

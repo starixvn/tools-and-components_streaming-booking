@@ -195,6 +195,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Models\BaseEventModel.cs" />
     <Compile Include="Models\IMG\EventModel.cs" />
     <Compile Include="Models\IMG\MatchModel.cs" />

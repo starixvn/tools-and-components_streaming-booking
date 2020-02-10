@@ -7,6 +7,7 @@ using System.Text;
 using System.Web.Hosting;
 using System.Xml.Linq;
 using Fanex.Logging;
+using StreamingBooking.Helpers;
 using StreamingBooking.Models;
 
 namespace StreamingBooking.Services
@@ -120,7 +121,7 @@ namespace StreamingBooking.Services
                     sportName = el.Element("sportinfo").Element("sport").Value;
                     kickOffDate = DateTime.Parse(el.Element("schedule").Element("date").Value);
                     var time = el.Element("schedule").Element("start").Element("time").Value.Split(':');
-                    kickOffDate = kickOffDate.Add(new TimeSpan(ushort.Parse(time[0]), ushort.Parse(time[1]), default(ushort)));
+                    kickOffDate = kickOffDate.Add(new TimeSpan(ushort.Parse(time[0]), ushort.Parse(time[1]), default(ushort))).ToClientTime(true);
 
                     listOfStream.Add(
                         new StreamModel

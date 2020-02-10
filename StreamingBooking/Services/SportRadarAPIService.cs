@@ -37,25 +37,28 @@ namespace StreamingBooking.Services
             _apiBaseAddress = new Uri(ConfigurationManager.AppSettings[ApiPathConfigKey]);
         }
 
-        protected override async Task<IEnumerable<SportsRadarEventModel>> GetEvents(LicenseeModel licensee, DateTime? from, DateTime? to)
+        protected override async Task<IEnumerable<SportsRadarEventModel>> GetEvents(LicenseeModel licensee)
         {
             using (var httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = _apiBaseAddress;
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", licensee.APISecret);
 
-                var query = string.Empty;
-                if (from.HasValue && to.HasValue)
-                {
-                    to = to.Value.Date.AddHours(23).AddMinutes(59);
-                    query = $"?from={from.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")}&to={to.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")}";
-                }
-
+                var query = BuildQuery();
                 var response = await httpClient.GetAsync($"events{query}").ConfigureAwait(false);
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var result = JsonConvert.DeserializeObject<IEnumerable<SportsRadarEventModel>>(json);
                 return result;
             }
+        }
+
+        private string BuildQuery()
+        {
+            var from = DateTime.UtcNow.Date;
+            var to = from.AddDays(LimitDays - 1).AddHours(23).AddMinutes(59);
+            var x = DateTime.Parse(to.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+            var query = $"?from={from.ToString("yyyy-MM-ddTHH:mm:ssZ")}&to={to.ToString("yyyy-MM-ddTHH:mm:ssZ")}";
+            return query;
         }
     }
 }

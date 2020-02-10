@@ -2,6 +2,7 @@
 using StreamingBooking.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,25 +13,29 @@ namespace StreamingBooking.Services
     {
         public abstract IEnumerable<LicenseeModel> Licensees { get; }
 
-        public IEnumerable<StreamModel> GetStreamEventData(DateTime? from, DateTime? to, params LicenseeModel[] licensees)
+        public IEnumerable<StreamModel> GetStreamEventData(params LicenseeModel[] licensees)
         {
-            var result = GetStreamEventDataAsync(from, to, licensees).Result;
+            var result = GetStreamEventDataAsync(licensees).Result;
             return result;
         }
 
-        public async Task<IEnumerable<StreamModel>> GetStreamEventDataAsync(DateTime? from, DateTime? to, params LicenseeModel[] licensees)
+        public async Task<IEnumerable<StreamModel>> GetStreamEventDataAsync(params LicenseeModel[] licensees)
         {
             var result = new List<StreamModel>();
             foreach (var licensee in licensees)
             {
-                var events = await GetEvents(licensee, from, to).ConfigureAwait(false);
+                var events = await GetEvents(licensee).ConfigureAwait(false);
                 var streamModels = ConvertToStreamModels(events, licensee.PartnerName);
                 result.AddRange(streamModels);
             }
             return result;
         }
 
-        protected abstract Task<IEnumerable<T>> GetEvents(LicenseeModel licensee, DateTime? from, DateTime? to);
+        protected int ClientTimeZone { get => Convert.ToInt32(ConfigurationManager.AppSettings["ClientTimeZone"]); }
+
+        protected int LimitDays { get => Convert.ToInt32(ConfigurationManager.AppSettings["API.Days"]); }
+
+        protected abstract Task<IEnumerable<T>> GetEvents(LicenseeModel licensee);
 
         private IEnumerable<StreamModel> ConvertToStreamModels(IEnumerable<T> events, string licensee)
         {

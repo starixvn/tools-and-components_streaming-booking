@@ -9,8 +9,8 @@ namespace StreamingBooking.Services
     {
         IEnumerable<LicenseeModel> Licensees { get; }
 
-        IEnumerable<StreamModel> GetStreamEventData(DateTime? from, DateTime? to, params LicenseeModel[] licensees);
+        IEnumerable<StreamModel> GetStreamEventData(params LicenseeModel[] licensees);
 
-        Task<IEnumerable<StreamModel>> GetStreamEventDataAsync(DateTime? from, DateTime? to, params LicenseeModel[] licensees);
+        Task<IEnumerable<StreamModel>> GetStreamEventDataAsync(params LicenseeModel[] licensees);
     }
 }

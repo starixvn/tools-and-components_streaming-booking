@@ -1,4 +1,5 @@
 ﻿using StreamingBooking.Common;
+using StreamingBooking.Helpers;
 using StreamingBooking.Models;
 using StreamingBooking.Services;
 
@@ -19,7 +20,7 @@ namespace StreamingBooking.Controllers
         public ActionResult Index()
         {
             var days = Convert.ToInt32(ConfigurationManager.AppSettings["API.Days"]);
-            var currentDay = DateTime.Now;
+            var currentDay = DateTime.Now.ToClientTime();
             var nextDay = currentDay.AddDays(days);
 
             var filterDates = new List<string>();
@@ -65,7 +66,8 @@ namespace StreamingBooking.Controllers
 
             var model = new StreamViewModel
             {
-                AllStreams = allStreams
+                AllStreams = allStreams,
+                DistinctStreams = new List<StreamModel>()
             };
 
             if (allStreams.Count > 0)
