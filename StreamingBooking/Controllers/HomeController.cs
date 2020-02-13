@@ -17,6 +17,11 @@ namespace StreamingBooking.Controllers
         private readonly IDataService dataService = new DataService();
         private readonly IActivityService activityService = new ActivityService();
 
+        public string RemoveCache(string licensee)
+        {
+            return dataService.ClearCache(licensee).ToString();
+        }
+
         public ActionResult Index()
         {
             var days = Convert.ToInt32(ConfigurationManager.AppSettings["API.Days"]);

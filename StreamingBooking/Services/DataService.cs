@@ -144,5 +144,28 @@ namespace StreamingBooking.Services
             }
             streams.AddRange(dataFromCache);
         }
+
+        public bool ClearCache(string licensee)
+        {
+            try
+            {
+                foreach (var cacheKey in GetCacheKeys(licensee))
+                {
+                    cacheService.Remove(key);
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private IEnumerable<string> GetCacheKeys(string licensee)
+        {
+            yield return $"{key}_SportRadarApi_{licensee}";
+            yield return $"{key}_UNASApi_{licensee}";
+            yield return $"{key}_IMGApi_{licensee}";
+        }
     }
 }
