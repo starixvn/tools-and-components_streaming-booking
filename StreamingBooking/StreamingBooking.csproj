@@ -203,8 +203,9 @@
     <Compile Include="Models\IMG\SportModel.cs" />
     <Compile Include="Models\IMG\TournamentModel.cs" />
     <Compile Include="Models\LicenseeModel.cs" />
-    <Compile Include="Models\SportRadar\CategoryModel.cs" />
+    <Compile Include="Models\SportRadar\ObjectIdentityModel.cs" />
     <Compile Include="Models\SportRadar\CompetitorModel.cs" />
+    <Compile Include="Models\SportRadar\StreamContentModel.cs" />
     <Compile Include="Models\SportRadar\SportRadarEventModel.cs" />
     <Compile Include="Models\StreamMetalModel.cs" />
     <Compile Include="Models\StreamModel.cs" />
