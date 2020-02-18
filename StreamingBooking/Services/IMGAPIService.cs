@@ -1,16 +1,17 @@
 ﻿namespace StreamingBooking.Services
 {
+    using Newtonsoft.Json;
+    using StreamingBooking.Helpers;
+    using StreamingBooking.Models;
+    using StreamingBooking.Models.IMG;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Net.Http;
     using System.Security.Cryptography;
     using System.Text;
-    using Newtonsoft.Json;
-    using StreamingBooking.Models;
-    using StreamingBooking.Models.IMG;
 
-    public static class IMGAPIService
+    public static class ImgApiService
     {
         private const string ALG = "HmacMD5";
 
@@ -72,7 +73,7 @@
                         AwayName = match.AwayTeam,
                         EventId = x.Id,
                         HomeName = match.HomeTeam,
-                        KickOffDate = x.StartDate,
+                        KickOffDate = x.StartDate.ToClientTime(),
                         LeagueName = x.Tournament.Name,
                         SportName = x.Tournament.Property.Sport.Name,
                         StreamId = x.Id

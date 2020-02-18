@@ -6,12 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+
 namespace StreamingBooking.Services
 {
     public class ActivityService : IActivityService
     {
         private readonly ICacheService cacheService = new CacheService();
         private readonly string key = ConfigurationManager.AppSettings["ActivityCacheKey"];
+
         public bool ActiveRow(int streamId)
         {
             cacheService.TryGet(key, out List<StreamModel> values);
@@ -61,7 +63,6 @@ namespace StreamingBooking.Services
             cacheService.Set(key, values, new CacheItemOptions().SetSlidingExpiration(TimeSpan.FromMinutes(20)));
 
             return true;
-
         }
 
         public List<StreamModel> GetActiveStream()

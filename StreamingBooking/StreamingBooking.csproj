@@ -25,7 +25,7 @@
     <AssemblyName>StreamingBooking</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -189,27 +189,37 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\LicenseeName.cs" />
     <Compile Include="Common\ProviderType.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Models\BaseEventModel.cs" />
     <Compile Include="Models\IMG\EventModel.cs" />
     <Compile Include="Models\IMG\MatchModel.cs" />
     <Compile Include="Models\IMG\PropertyModel.cs" />
     <Compile Include="Models\IMG\SportModel.cs" />
     <Compile Include="Models\IMG\TournamentModel.cs" />
     <Compile Include="Models\LicenseeModel.cs" />
+    <Compile Include="Models\SportRadar\ObjectIdentityModel.cs" />
+    <Compile Include="Models\SportRadar\CompetitorModel.cs" />
+    <Compile Include="Models\SportRadar\StreamContentModel.cs" />
+    <Compile Include="Models\SportRadar\SportRadarEventModel.cs" />
     <Compile Include="Models\StreamMetalModel.cs" />
     <Compile Include="Models\StreamModel.cs" />
     <Compile Include="Models\StreamViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Abstract\IActivityService.cs" />
+    <Compile Include="Services\Abstract\IDataService.cs" />
+    <Compile Include="Services\Abstract\IEventProviderService.cs" />
     <Compile Include="Services\ActivityService.cs" />
-    <Compile Include="Services\APIService.cs" />
+    <Compile Include="Services\ProviderApiService.cs" />
+    <Compile Include="Services\UnasApiService.cs" />
     <Compile Include="Services\DataService.cs" />
-    <Compile Include="Services\IDataService.cs" />
-    <Compile Include="Services\IMGAPIService.cs" />
-    <Compile Include="Services\IActivityService.cs" />
+    <Compile Include="Services\ImgApiService.cs" />
+    <Compile Include="Services\SportRadarApiService.cs" />
     <Compile Include="StreamingComparer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -463,11 +473,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51303</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl></IISUrl>
+          <IISUrl>http://localhost:51304/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
