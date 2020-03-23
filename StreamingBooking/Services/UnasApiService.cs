@@ -1,6 +1,4 @@
-﻿using StreamingBooking.Helpers;
-using StreamingBooking.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +6,9 @@ using System.Net;
 using System.Text;
 using System.Web.Hosting;
 using System.Xml.Linq;
+using Fanex.Logging;
+using StreamingBooking.Helpers;
+using StreamingBooking.Models;
 
 namespace StreamingBooking.Services
 {
@@ -72,12 +73,6 @@ namespace StreamingBooking.Services
         public static XDocument GetXmlResponse(string requestUrl)
         {
             HttpWebRequest request = WebRequest.Create(requestUrl) as HttpWebRequest;
-            var proxy = ProxyHelper.CreateWebProxy();
-            if (proxy != null)
-            {
-                request.Proxy = proxy;
-            }
-
             XDocument xmlDoc = null;
 
             using (var response = request.GetResponse() as HttpWebResponse)
@@ -117,7 +112,7 @@ namespace StreamingBooking.Services
             foreach (XElement el in events)
             {
                 try
-                {
+                {                   
                     eventId = int.Parse(el.Element("eventid").Value);
                     awayName = el.Element("sportinfo").Element("teamA").Value;
                     homeName = el.Element("sportinfo").Element("teamB").Value;
@@ -137,11 +132,11 @@ namespace StreamingBooking.Services
                             KickOffDate = kickOffDate,
                             LeagueName = leagueName,
                             StreamId = streamId,
-                            SportName = sportName,
+                            SportName = sportName,                           
                             Dafabet = partnerName == Dafabet,
                             Fun88 = partnerName == Fun88,
                             IBCBet = partnerName == IBCBet,
-                            M88 = partnerName == M88
+                            M88 = partnerName == M88                            
                         });
                 }
                 catch
