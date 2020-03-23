@@ -6,7 +6,9 @@
     using StreamingBooking.Models.IMG;
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Linq;
+    using System.Net;
     using System.Net.Http;
     using System.Security.Cryptography;
     using System.Text;
@@ -55,7 +57,17 @@
             var apiToken = GenerateAPIToken(licensee.APISecret, timestamp);
             apiUrl = string.Format("{0}?operatorId={1}&auth={2}&timestamp={3}", apiUrl, licensee.PartnerId, apiToken, timestamp);
 
-            using (HttpClient client = new HttpClient())
+            var proxy = ConfigurationManager.AppSettings["Proxy"];
+            var handler = new HttpClientHandler();
+            if (!string.IsNullOrEmpty(proxy))
+            {
+                handler = new HttpClientHandler()
+                {
+                    Proxy = new WebProxy(proxy),
+                    UseProxy = true,
+                };
+            }
+            using (HttpClient client = new HttpClient(handler))
             {
                 var result = client.GetAsync(apiUrl).Result.Content.ReadAsStringAsync().Result;
 
