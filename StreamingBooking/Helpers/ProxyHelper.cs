@@ -17,7 +17,7 @@ namespace StreamingBooking.Helpers
             return new WebProxy
             {
                 Address = new Uri(proxyAddress),
-                UseDefaultCredentials = true
+                BypassProxyOnLocal = true
             };
         }
     }
