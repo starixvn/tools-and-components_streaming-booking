@@ -68,7 +68,9 @@
 
             using (HttpClient client = new HttpClient(handler))
             {
-                var result = client.GetAsync(apiUrl).Result.Content.ReadAsStringAsync().Result;
+                var response = client.GetAsync(apiUrl).Result;
+                response.EnsureSuccessStatusCode();
+                var result = response.Content.ReadAsStringAsync().Result;
 
                 var events = JsonConvert.DeserializeObject<List<EventModel>>(result);
 
