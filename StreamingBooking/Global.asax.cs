@@ -2,17 +2,17 @@
 using Fanex.Caching.Redis;
 using Fanex.Logging;
 using Fanex.Logging.RabbitMQ;
+using StreamingBooking.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace StreamingBooking
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
+    // Note: For instructions on enabling IIS6 or IIS7 classic mode,
     // visit http://go.microsoft.com/?LinkId=9394801
 
     public class MvcApplication : System.Web.HttpApplication
@@ -35,18 +35,12 @@ namespace StreamingBooking
                 ConnectionString = ConfigurationManager.AppSettings["RedisServer"],
                 ApplicationName = ConfigurationManager.AppSettings["RedisAppName"]
             }));
-
         }
 
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError().GetBaseException();
-            string message = ex.Message +
-                    "\r\nSource: " + ex.Source +
-                    "\r\nDomain: " + HttpContext.Current.Request.Headers["Host"] +
-                    "\r\nTargetSite: " + ex.TargetSite +
-                    "\r\nStackTrace: " + ex.StackTrace;
-
+            string message = LogMessageHelper.GenerateMessage(ex);
             LogService.Error(message);
         }
     }

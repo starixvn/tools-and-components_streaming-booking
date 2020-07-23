@@ -55,9 +55,22 @@
             var apiToken = GenerateAPIToken(licensee.APISecret, timestamp);
             apiUrl = string.Format("{0}?operatorId={1}&auth={2}&timestamp={3}", apiUrl, licensee.PartnerId, apiToken, timestamp);
 
-            using (HttpClient client = new HttpClient())
+            var handler = new HttpClientHandler();
+            var proxy = ProxyHelper.CreateWebProxy();
+            if (proxy != null)
             {
-                var result = client.GetAsync(apiUrl).Result.Content.ReadAsStringAsync().Result;
+                handler = new HttpClientHandler()
+                {
+                    Proxy = proxy,
+                    UseProxy = true
+                };
+            }
+
+            using (HttpClient client = new HttpClient(handler))
+            {
+                var response = client.GetAsync(apiUrl).Result;
+                response.EnsureSuccessStatusCode();
+                var result = response.Content.ReadAsStringAsync().Result;
 
                 var events = JsonConvert.DeserializeObject<List<EventModel>>(result);
 

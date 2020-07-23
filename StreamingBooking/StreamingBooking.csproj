@@ -189,6 +189,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attribute\HandleExceptionAttribute.cs" />
     <Compile Include="Common\LicenseeName.cs" />
     <Compile Include="Common\ProviderType.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -196,6 +197,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Helpers\LogMessageHelper.cs" />
+    <Compile Include="Helpers\ProxyHelper.cs" />
     <Compile Include="Models\BaseEventModel.cs" />
     <Compile Include="Models\IMG\EventModel.cs" />
     <Compile Include="Models\IMG\MatchModel.cs" />

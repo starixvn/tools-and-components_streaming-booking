@@ -1,4 +1,5 @@
-﻿using StreamingBooking.Common;
+﻿using StreamingBooking.Attribute;
+using StreamingBooking.Common;
 using StreamingBooking.Helpers;
 using StreamingBooking.Models;
 using StreamingBooking.Services;
@@ -12,6 +13,7 @@ using System.Web.Mvc;
 
 namespace StreamingBooking.Controllers
 {
+    [HandleException]
     public class HomeController : Controller
     {
         private readonly IDataService dataService = new DataService();
