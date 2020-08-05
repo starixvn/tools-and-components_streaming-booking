@@ -34,14 +34,14 @@ namespace StreamingBooking.Services
                     GetStreamEventDataFromUNASApi(filterLicensee, streams);
                     break;
 
-                case (int)ProviderType.SportRadar:
-                    GetStreamEventDataFromSportRadarApi(filterLicensee, streams);
+                //case (int)ProviderType.SportRadar:
+                    //GetStreamEventDataFromSportRadarApi(filterLicensee, streams);
                     break;
 
                 default:
                     GetStreamEventDataFromUNASApi(filterLicensee, streams);
                     GetStreamEventDataFromIMGApi(filterLicensee, streams);
-                    GetStreamEventDataFromSportRadarApi(filterLicensee, streams);
+                    //GetStreamEventDataFromSportRadarApi(filterLicensee, streams);
                     break;
             }
 

@@ -4,6 +4,6 @@
     {
         Unas = 1,
         IMG = 2,
-        SportRadar = 3
+        //SportRadar = 3
     }
 }
