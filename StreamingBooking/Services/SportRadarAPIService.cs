@@ -58,6 +58,7 @@ namespace StreamingBooking.Services
 
                 var query = BuildQuery();
                 var response = await httpClient.GetAsync($"events{query}").ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var result = JsonConvert.DeserializeObject<IEnumerable<SportsRadarEventModel>>(json);
                 return result;
