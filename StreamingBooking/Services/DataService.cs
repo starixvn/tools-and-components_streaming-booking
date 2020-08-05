@@ -151,7 +151,7 @@ namespace StreamingBooking.Services
             {
                 foreach (var cacheKey in GetCacheKeys(licensee))
                 {
-                    cacheService.Remove(key);
+                    cacheService.Remove(cacheKey);
                 }
                 return true;
             }
