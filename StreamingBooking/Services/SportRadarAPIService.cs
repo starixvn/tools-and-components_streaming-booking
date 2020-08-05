@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using StreamingBooking.Common;
+using StreamingBooking.Helpers;
 using StreamingBooking.Models;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,18 @@ namespace StreamingBooking.Services
 
         protected override async Task<IEnumerable<SportsRadarEventModel>> GetEvents(LicenseeModel licensee)
         {
-            using (var httpClient = new HttpClient())
+            var handler = new HttpClientHandler();
+            var proxy = ProxyHelper.CreateWebProxy();
+            if (proxy != null)
+            {
+                handler = new HttpClientHandler()
+                {
+                    Proxy = proxy,
+                    UseProxy = true
+                };
+            }
+
+            using (var httpClient = new HttpClient(handler))
             {
                 httpClient.BaseAddress = _apiBaseAddress;
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", licensee.APISecret);
