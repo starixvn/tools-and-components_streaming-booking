@@ -33,6 +33,8 @@ namespace StreamingBooking.Services
             }
         }
 
+        protected override string ProviderName => nameof(ProviderType.SportRadar);
+
         private SportRadarApiService()
         {
             _apiBaseAddress = new Uri(ConfigurationManager.AppSettings[ApiPathConfigKey]);
@@ -69,7 +71,6 @@ namespace StreamingBooking.Services
         {
             var from = DateTime.UtcNow.Date;
             var to = from.AddDays(LimitDays - 1).AddHours(23).AddMinutes(59);
-            var x = DateTime.Parse(to.ToString("yyyy-MM-ddTHH:mm:ssZ"));
             var query = $"?from={from.ToString("yyyy-MM-ddTHH:mm:ssZ")}&to={to.ToString("yyyy-MM-ddTHH:mm:ssZ")}";
             return query;
         }

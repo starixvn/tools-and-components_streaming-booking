@@ -7,6 +7,7 @@ using System.Text;
 using System.Web.Hosting;
 using System.Xml.Linq;
 using Fanex.Logging;
+using StreamingBooking.Common;
 using StreamingBooking.Helpers;
 using StreamingBooking.Models;
 
@@ -132,11 +133,12 @@ namespace StreamingBooking.Services
                             KickOffDate = kickOffDate,
                             LeagueName = leagueName,
                             StreamId = streamId,
-                            SportName = sportName,                           
+                            SportName = sportName,
                             Dafabet = partnerName == Dafabet,
                             Fun88 = partnerName == Fun88,
                             IBCBet = partnerName == IBCBet,
-                            M88 = partnerName == M88                            
+                            M88 = partnerName == M88,
+                            ProviderName = nameof(ProviderType.Unas)
                         });
                 }
                 catch

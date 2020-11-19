@@ -30,7 +30,11 @@ namespace StreamingBooking.Models
         public bool ALog { get; set; }
 
         public bool Mayfair { get; set; }
+
         public string Remark { get; set; }
+
         public bool IsActive { get; set; }
+
+        public string ProviderName { get; set; }
     }
 }
