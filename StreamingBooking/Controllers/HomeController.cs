@@ -3,10 +3,12 @@ using StreamingBooking.Common;
 using StreamingBooking.Helpers;
 using StreamingBooking.Models;
 using StreamingBooking.Services;
+using StreamingBooking.Services.Excel;
 
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,6 +20,7 @@ namespace StreamingBooking.Controllers
     {
         private readonly IDataService dataService = new DataService();
         private readonly IActivityService activityService = new ActivityService();
+        private readonly IHomeStreamingBookingExcel _homeStreamingBookingExcel = new HomeStreamingBookingExcel();
 
         public string RemoveCache(string licensee)
         {
@@ -56,6 +59,19 @@ namespace StreamingBooking.Controllers
 
         [HttpPost]
         public ActionResult Search(
+            string fromDate,
+            string toDate,
+            string league,
+            string licensee,
+            string sports,
+            int provider)
+        {
+            var model = GetData(fromDate, toDate, league, licensee, sports, provider);
+
+            return View(model);
+        }
+
+        private StreamViewModel GetData(
             string fromDate,
             string toDate,
             string league,
@@ -113,11 +129,15 @@ namespace StreamingBooking.Controllers
                                              LeagueName = s.LeagueName,
                                              M88 = s.M88,
                                              Mayfair = s.Mayfair,
-                                             Remark = ax.Remark
+                                             Remark = ax.Remark,
+                                             ProviderName = s.ProviderName
                                          }).ToList();
             }
-            return View(model);
+
+            return model;
         }
+
+
 
         [HttpGet]
         public JsonResult GetLeagues(int provider, string licensee, string fromDate, string toDate)
@@ -162,6 +182,26 @@ namespace StreamingBooking.Controllers
             if (streamId > 0)
             {
                 activityService.UpdateRemark(streamId, HttpUtility.HtmlEncode(remark));
+            }
+        }
+
+        [HttpGet]
+        public FileContentResult Export(
+            string fromDate,
+            string toDate,
+            string league,
+            string licensee,
+            string sports,
+            int provider)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                var model = GetData(fromDate, toDate, league, licensee, sports, provider);
+                // Generate Excel
+                var workbook = _homeStreamingBookingExcel.Export(model);
+                workbook.Write(memoryStream);
+
+                return File(memoryStream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "SB-" + DateTime.UtcNow.ToClientTime(true).ToString("dd-MM-yyyy") + ".xlsx");
             }
         }
 

@@ -18,6 +18,10 @@
             siteObject.search();
         });
 
+        $('#btnExport').on('click', function () {
+            siteObject.export();
+        });
+
         $('#providers').on('change', function () {
             $('#licensees').val("");
 
@@ -96,6 +100,20 @@
                 }
             }
         });
+    };
+
+    siteObject.export = function () {
+        var fromDate = $('#fromDate').val();
+        var toDate = $('#toDate').val();
+        var league = $('#leagues').val();
+        var licensee = $('#licensees').val();
+        var provider = $('#providers').val();
+        var sports = siteObject.getSportsSelected();
+
+        var url = siteObject.getFullUrl("Home/Export");
+        url = `${url}?fromDate=${fromDate}&fromDate=${fromDate}&toDate=${toDate}&league=${league}&licensee=${licensee}&provider=${provider}&sports=${sports}`;
+
+        window.location.href = url;
     };
 
     siteObject.AutoRefresh = function () {

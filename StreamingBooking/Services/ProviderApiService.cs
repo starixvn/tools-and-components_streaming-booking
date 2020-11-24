@@ -13,6 +13,8 @@ namespace StreamingBooking.Services
     {
         public abstract IEnumerable<LicenseeModel> Licensees { get; }
 
+        protected abstract string ProviderName { get; } 
+
         public IEnumerable<StreamModel> GetStreamEventData(params LicenseeModel[] licensees)
         {
             var result = GetStreamEventDataAsync(licensees).Result;
@@ -58,7 +60,8 @@ namespace StreamingBooking.Services
                 Dafabet = licensee == LicenseeName.Dafabet,
                 M88 = licensee == LicenseeName.M88,
                 Fun88 = licensee == LicenseeName.Fun88,
-                Mayfair = licensee == LicenseeName.Mayfair
+                Mayfair = licensee == LicenseeName.Mayfair,
+                ProviderName = ProviderName
             });
 
             return result;
