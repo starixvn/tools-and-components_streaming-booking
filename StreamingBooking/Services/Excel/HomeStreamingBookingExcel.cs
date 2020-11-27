@@ -29,7 +29,7 @@
                 {
                     colIndex = 0;
                     var row = sheet.GetRow(rowIndex);
-                    row.Cells[colIndex++].SetCellValue(item.KickOffDate.ToString("dd-MM-yyyy") + " " + item.KickOffDate.ToString("HH:mm"));
+                    row.Cells[colIndex++].SetCellValue(item.KickOffDate);
                     row.Cells[colIndex++].SetCellValue(item.SportName);
                     row.Cells[colIndex++].SetCellValue(item.ProviderName);
                     row.Cells[colIndex++].SetCellValue(item.LeagueName);
