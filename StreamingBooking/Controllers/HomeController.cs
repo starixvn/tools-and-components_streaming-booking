@@ -245,9 +245,9 @@ namespace StreamingBooking.Controllers
                     allLicensees = imgLicensees;
                     break;
 
-                case (int)ProviderType.Unas:
-                    allLicensees = unasLicensees;
-                    break;
+                //case (int)ProviderType.Unas:
+                //    allLicensees = unasLicensees;
+                //    break;
 
                 default:
                     allLicensees = unasLicensees.Union(imgLicensees).ToList();

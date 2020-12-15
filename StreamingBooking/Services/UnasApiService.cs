@@ -138,7 +138,7 @@ namespace StreamingBooking.Services
                             Fun88 = partnerName == Fun88,
                             IBCBet = partnerName == IBCBet,
                             M88 = partnerName == M88,
-                            ProviderName = nameof(ProviderType.Unas)
+                            //ProviderName = nameof(ProviderType.Unas)
                         });
                 }
                 catch
