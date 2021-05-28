@@ -5,6 +5,7 @@ using StreamingBooking.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -38,6 +39,7 @@ namespace StreamingBooking.Services
         private SportRadarApiService()
         {
             _apiBaseAddress = new Uri(ConfigurationManager.AppSettings[ApiPathConfigKey]);
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         }
 
         protected override async Task<IEnumerable<SportsRadarEventModel>> GetEvents(LicenseeModel licensee)
