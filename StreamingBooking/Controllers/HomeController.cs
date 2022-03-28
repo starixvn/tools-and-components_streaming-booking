@@ -223,16 +223,14 @@ namespace StreamingBooking.Controllers
 
         private static List<string> GetLicensees(int provider = 0)
         {
-            var allLicensees = new List<string>();
-            var unasLicensees = new List<string> {
-                    //APIService.Bodog,
-                    UnasApiService.Dafabet,
-                    //APIService.Fun88,
-                    UnasApiService.IBCBet,
-                    UnasApiService.M88
-                    //APIService.Macaubet,
-                    //APIService.Tlc88
+            List<string> allLicensees;
+
+            var sportRadarLicensees = new List<string> {
+                    SportRadarApiService.Dafabet,
+                    SportRadarApiService.IBCBet,
+                    SportRadarApiService.M88
             };
+
             var imgLicensees = new List<string> {
                     ImgApiService.Fun88,
                     ImgApiService.ALog,
@@ -244,13 +242,11 @@ namespace StreamingBooking.Controllers
                 case (int)ProviderType.IMG:
                     allLicensees = imgLicensees;
                     break;
-
-                case (int)ProviderType.Unas:
-                    allLicensees = unasLicensees;
+                case (int)ProviderType.SportRadar:
+                    allLicensees = sportRadarLicensees;
                     break;
-
                 default:
-                    allLicensees = unasLicensees.Union(imgLicensees).ToList();
+                    allLicensees = sportRadarLicensees.Union(imgLicensees).ToList();
                     break;
             }
 
