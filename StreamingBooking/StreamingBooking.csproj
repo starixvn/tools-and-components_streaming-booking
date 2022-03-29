@@ -237,7 +237,6 @@
     <Compile Include="Services\Excel\HomeStreamingBookingExcel.cs" />
     <Compile Include="Services\Excel\IHomeStreamingBookingExcel.cs" />
     <Compile Include="Services\ProviderApiService.cs" />
-    <Compile Include="Services\UnasApiService.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\ImgApiService.cs" />
     <Compile Include="Services\SportRadarApiService.cs" />

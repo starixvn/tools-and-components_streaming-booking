@@ -14,6 +14,13 @@ namespace StreamingBooking.Services
 {
     public class SportRadarApiService : ProviderApiService<SportsRadarEventModel>
     {
+        public const string IBCBet = "IBCBet";
+
+        public const string Dafabet = "Dafabet";
+
+        public const string M88 = "M88";
+
+
         private static readonly Lazy<IEventProviderService> _instance = new Lazy<IEventProviderService>(() => new SportRadarApiService());
 
         public static IEventProviderService Instance { get => _instance.Value; }
